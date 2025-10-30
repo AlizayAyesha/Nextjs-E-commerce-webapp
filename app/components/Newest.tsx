@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@sanity/client';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart, Bell, Clock, Gift, Home, ShoppingCart, User } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import Countdown from 'react-countdown';
+import productsData from './query-result.json';
+import { useCurrency } from '../context/CurrencyContext';
+import { useWishlist } from '../context/WishlistContext';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import LuxuryCarousel from './LuxuryCarousel';
 
 interface Product {
   _id: string;
@@ -15,91 +23,491 @@ interface Product {
   description: string | null;
 }
 
-const client = createClient({
-  projectId: '7p0muvi9',
-  dataset: 'production',
-  apiVersion: '2024-10-09',
-  useCdn: true,
-});
-
-async function getData(): Promise<Product[]> {
-  const query = `*[_type == "product" && category->name == "Men"] | order(_createdAt desc)[0...4] {
-    _id,
-    price,
-    name,
-    "slug": slug.current,
-    "categoryName": category->name,
-    "imageUrl": image.asset->url,
-    description
-  }`;
-
-  const data = await client.fetch(query);
-  return data;
-}
-
 export default function Newest() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [topPicks, setTopPicks] = useState<Product[]>([]);
+  const [youMayAlsoLike, setYouMayAlsoLike] = useState<Product[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<Product[]>([]);
+  const [stockAlerts, setStockAlerts] = useState<{ [key: string]: boolean }>({});
+  const [showSpinGame, setShowSpinGame] = useState(false);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [spinResult, setSpinResult] = useState<string | null>(null);
+  const { convertPrice, currency } = useCurrency();
+  const { addToWishlist: addToWishlistContext, removeFromWishlist: removeFromWishlistContext, isInWishlist } = useWishlist();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getData();
-        console.log('Fetched products:', data);
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+    const menProducts = productsData
+      .filter((p) => p.categoryName === 'Men')
+      .slice(0, 4)
+      .map((p) => ({
+        ...p,
+        price: typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price,
+      }));
+    setProducts(menProducts);
 
-    fetchData();
+    const topPicksProducts = productsData
+      .filter((p) => p.categoryName === 'Top picks')
+      .slice(0, 8)
+      .map((p) => ({
+        ...p,
+        price: typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price,
+      }));
+    setTopPicks(topPicksProducts);
+
+    // Load recently viewed from localStorage
+    const savedRecentlyViewed = localStorage.getItem('recentlyViewed');
+    if (savedRecentlyViewed) {
+      setRecentlyViewed(JSON.parse(savedRecentlyViewed));
+    }
+
+    // Load stock alerts from localStorage
+    const savedAlerts = localStorage.getItem('stockAlerts');
+    if (savedAlerts) {
+      setStockAlerts(JSON.parse(savedAlerts));
+    }
   }, []);
 
-  return (
-    <div >
-      <div className='mx-auto max-w-2xl px-4 py-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-        <div className='flex justify-between items-center'>
-          <h2 className='text-2xl font-bold tracking-tight text-gray-900'>Our New Products</h2>
-          
-          {/* Correct "See All" link */}
-          <a href='/product' className='text-primary flex items-center gap-x-1'>
-            See All
-            <span>
-              <ArrowRight />
-            </span>
-          </a>
-        </div>
-        
-        {products && products.length > 0 ? (
-          <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-            {products.map((product: Product) => (
-              <div key={product._id}>
-                <Image
-                  src={product.imageUrl ?? '/default-image.jpg'}
-                  alt={product.name}
-                  className="rounded-lg shadow-md transition-transform transform hover:scale-105 w-full h-90 object-cover object-center lg:h-full lg:w-full"
-                  width={300}
-                  height={300}
-                />
-                <div className="mt- flex justify-between">
-                  <h3 className="text-sm font-extrabold text-gray-900 mt-6">
-                   
-                    <a href={`/product/${product.slug}`}>{product.name}</a>
-                  </h3>
-                  <p className="mt-6 text-xs text-green-500">{product.price}</p>
-                  <a
-  href={`/product/${product.slug}`}
-  className="bg-white mt-5 inline-block px-2 py-0 bg-primary text-black font-semibold text-xs rounded-md transition"
->
-  View More
-</a>
+  useEffect(() => {
+    // Generate "You may also like" based on category and price range
+    const currentCategory = 'Men';
+    const avgPrice = products.reduce((sum, p) => sum + p.price, 0) / products.length;
+    const filtered = productsData
+      .filter((p) => p.categoryName === currentCategory || (Math.abs(p.price - avgPrice) < 50))
+      .filter((p) => !products.some(prod => prod._id === p._id))
+      .slice(0, 4)
+      .map((p) => ({
+        ...p,
+        price: typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price,
+      }));
+    setYouMayAlsoLike(filtered);
+  }, [products]);
 
+
+
+  const addToRecentlyViewed = (product: Product) => {
+    const newRecentlyViewed = [product, ...recentlyViewed.filter(p => p._id !== product._id)].slice(0, 5);
+    setRecentlyViewed(newRecentlyViewed);
+    localStorage.setItem('recentlyViewed', JSON.stringify(newRecentlyViewed));
+  };
+
+  const subscribeToStockAlert = (productId: string) => {
+    const newAlerts = { ...stockAlerts, [productId]: true };
+    setStockAlerts(newAlerts);
+    localStorage.setItem('stockAlerts', JSON.stringify(newAlerts));
+    alert('Subscribed to stock alerts for this product!');
+  };
+
+  const handleSpin = () => {
+    setIsSpinning(true);
+    setSpinResult(null);
+
+    // Simulate spinning animation
+    setTimeout(() => {
+      const prizes = ['10% Off', '20% Off', 'Free Shipping', 'Try Again', '50% Off', 'Buy One Get One'];
+      const randomPrize = prizes[Math.floor(Math.random() * prizes.length)];
+      setSpinResult(randomPrize);
+      setIsSpinning(false);
+    }, 2000);
+  };
+
+
+
+  const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
+    return (
+      <span className="text-red-600 font-bold">
+        {days}d {hours}h {minutes}m {seconds}s
+      </span>
+    );
+  };
+
+  return (
+    <div className="bg-white py-16">
+      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center mb-12'>
+          <h2 className='text-4xl font-extrabold tracking-tight text-red-600'>Hot Sale</h2>
+
+          <Link href='/product' className='text-indigo-600 hover:text-indigo-800 flex items-center gap-x-2 font-semibold transition-colors duration-200'>
+            See All
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+
+        {products && products.length > 0 ? (
+          <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+            {products.map((product: Product) => (
+              <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative">
+                <div className="absolute top-4 right-4 z-10 flex gap-2">
+                  <button
+                    onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
+                      _id: product._id,
+                      name: product.name,
+                      price: product.price,
+                      image: product.imageUrl || '',
+                      slug: product.slug,
+                      category: product.categoryName,
+                      description: product.description || '',
+                    })}
+                    className={`p-2 rounded-full ${isInWishlist(product._id) ? 'bg-red-500 text-white' : 'bg-white text-gray-600'} hover:bg-red-500 hover:text-white transition-colors`}
+                  >
+                    <Heart className="w-4 h-4" fill={isInWishlist(product._id) ? 'currentColor' : 'none'} />
+                  </button>
+                  <button
+                    onClick={() => subscribeToStockAlert(product._id)}
+                    className={`p-2 rounded-full ${stockAlerts[product._id] ? 'bg-green-500 text-white' : 'bg-white text-gray-600'} hover:bg-green-500 hover:text-white transition-colors`}
+                  >
+                    <Bell className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="relative overflow-hidden">
+                  <Image
+                    src={product.imageUrl ?? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
+                    alt={product.name}
+                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300"
+                    width={300}
+                    height={300}
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    <Link href={`/product/${product.slug}`} onClick={() => addToRecentlyViewed(product)} className="hover:text-indigo-600 transition-colors duration-200">
+                      {product.name}
+                    </Link>
+                  </h3>
+                  <p className="text-2xl font-bold text-indigo-600 mb-4">
+                    {currency} {convertPrice(product.price).toFixed(2)}
+                  </p>
+                  <Link
+                    href={`/product/${product.slug}`}
+                    onClick={() => addToRecentlyViewed(product)}
+                    className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+                  >
+                    View More
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p>No products available at the moment.</p>
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">No products available at the moment.</p>
+          </div>
         )}
+
+        {/* Luxurious Bookings Carousel */}
+        <div className="mt-20">
+          <h3 className="text-4xl font-extrabold text-gray-900 mb-10 flex items-center gap-3">
+            <span className="text-yellow-400">★</span> Luxury Sale
+          </h3>
+
+          <Slider
+            dots={true}
+            infinite={true}
+            speed={900}
+            slidesToShow={1}
+            slidesToScroll={1}
+            autoplay={true}
+            autoplaySpeed={5000}
+            fade={true}
+            cssEase="ease-in-out"
+            arrows={false}
+          >
+            {[
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/36/45/bd/3645bd16d43723c3c48edd8407bf1ec3.mp4",
+                title: "ROLLS-ROYCE PHANTOM SERIES II",
+                desc: "Timeless craftsmanship meets modern elegance. Experience the pinnacle of luxury.",
+                slug: "rolls-royce-phantom-series-ii",
+              },
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/2c/dd/6c/2cdd6c6be47755dba680ea8ab88c4c81.mp4",
+                title: "BENTLEY CONTINENTAL GT",
+                desc: "Pure British luxury redefined. Grace, power, and sophistication in one frame.",
+                slug: "bentley-continental-gt",
+              },
+            ].map((vid, i) => (
+              <div key={i} className="px-6">
+                <Link href={`/product/${vid.slug}`}>
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group cursor-pointer">
+                    <video
+                      src={vid.url}
+                      className="w-full h-[450px] object-cover rounded-3xl transition-transform duration-[2500ms] ease-in-out group-hover:scale-105"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-10">
+                      <div className="backdrop-blur-sm bg-white/5 p-4 rounded-xl transition-all duration-500 group-hover:bg-white/10">
+                        <h4 className="text-2xl font-bold text-white tracking-wide drop-shadow-md">{vid.title}</h4>
+                        <p className="text-sm text-gray-200 mt-2">{vid.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* You May Also Like — Videos Carousel */}
+        <div className="mt-20">
+          <div className="flex justify-between items-center mb-8">
+            <h3 className="text-3xl font-extrabold text-gray-900">
+              You May Also Like — Watch & Discover
+            </h3>
+            <Link href='/luxury' className='text-indigo-600 hover:text-indigo-800 flex items-center gap-x-2 font-semibold transition-colors duration-200'>
+              More
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+
+          <Slider
+            dots={true}
+            infinite={true}
+            speed={700}
+            slidesToShow={3}
+            slidesToScroll={1}
+            autoplay={true}
+            autoplaySpeed={4500}
+            cssEase="ease-in-out"
+            arrows={false}
+            responsive={[
+              { breakpoint: 1024, settings: { slidesToShow: 2 } },
+              { breakpoint: 640, settings: { slidesToShow: 1 } },
+            ]}
+          >
+            {[
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/4e/5c/d6/4e5cd6844136d8b5d11300d60c0c0619.mp4",
+                title: "ASTON MARTIN DB12",
+                slug: "aston-martin-db12",
+              },
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/8d/b5/d7/8db5d723f96cc05bb4e8e7678d2b5fc1.mp4",
+                title: "Mclaren 570S",
+                slug: "mclaren-570s",
+              },
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/d5/b9/50/d5b950936ff5da14a995da5d052765fa.mp4",
+                title: "Ferrari F8 Spider",
+                slug: "ferrari-f8-spider",
+              },
+               {
+                url: "https://v1.pinimg.com/videos/mc/720p/36/45/bd/3645bd16d43723c3c48edd8407bf1ec3.mp4",
+                title: "ROLLS-ROYCE PHANTOM SERIES II",
+                slug: "rolls-royce-phantom-series-ii",
+              },
+              {
+                url: "https://v1.pinimg.com/videos/mc/720p/2c/dd/6c/2cdd6c6be47755dba680ea8ab88c4c81.mp4",
+                title: "BENTLEY CONTINENTAL GT",
+                slug: "bentley-continental-gt",
+              },
+            ].map((vid, index) => (
+              <div key={index} className="px-3">
+                <Link href={`/product/${vid.slug}`}>
+                  <div className="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer">
+                    <video
+                      src={vid.url}
+                      className="w-full h-72 object-cover rounded-2xl group-hover:scale-110 transition-transform duration-[2000ms] ease-in-out"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-start p-6">
+                      <h4 className="text-xl font-semibold text-white drop-shadow-md">{vid.title}</h4>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Top Picks */}
+        {topPicks && topPicks.length > 0 && (
+          <div className="mt-16">
+            <div className='flex justify-between items-center mb-12'>
+              <h2 className='text-4xl font-extrabold tracking-tight text-red-600'>Top Picks</h2>
+
+              <Link href='/product' className='text-indigo-600 hover:text-indigo-800 flex items-center gap-x-2 font-semibold transition-colors duration-200'>
+                See All
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+
+            <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+              {topPicks.map((product: Product) => (
+                <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative">
+                  <div className="absolute top-4 right-4 z-10 flex gap-2">
+                    <button
+                      onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
+                        _id: product._id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.imageUrl || '',
+                        slug: product.slug,
+                        category: product.categoryName,
+                        description: product.description || '',
+                      })}
+                      className={`p-2 rounded-full ${isInWishlist(product._id) ? 'bg-red-500 text-white' : 'bg-white text-gray-600'} hover:bg-red-500 hover:text-white transition-colors`}
+                    >
+                      <Heart className="w-4 h-4" fill={isInWishlist(product._id) ? 'currentColor' : 'none'} />
+                    </button>
+                    <button
+                      onClick={() => subscribeToStockAlert(product._id)}
+                      className={`p-2 rounded-full ${stockAlerts[product._id] ? 'bg-green-500 text-white' : 'bg-white text-gray-600'} hover:bg-green-500 hover:text-white transition-colors`}
+                    >
+                      <Bell className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <div className="relative overflow-hidden">
+                    <Image
+                      src={product.imageUrl ?? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
+                      alt={product.name}
+                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300"
+                      width={300}
+                      height={300}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      <Link href={`/product/${product.slug}`} onClick={() => addToRecentlyViewed(product)} className="hover:text-indigo-600 transition-colors duration-200">
+                        {product.name}
+                      </Link>
+                    </h3>
+                    <p className="text-2xl font-bold text-indigo-600 mb-4">
+                      {currency} {convertPrice(product.price).toFixed(2)}
+                    </p>
+                    <Link
+                      href={`/product/${product.slug}`}
+                      onClick={() => addToRecentlyViewed(product)}
+                      className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+                    >
+                      View More
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Luxury Carousel */}
+        <LuxuryCarousel />
+
+        {/* Recently Viewed */}
+        {recentlyViewed.length > 0 && (
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">Recently Viewed</h3>
+            <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+              {recentlyViewed.map((product: Product) => (
+                <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                  <div className="relative overflow-hidden">
+                    <Image
+                      src={product.imageUrl ?? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
+                      alt={product.name}
+                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-300"
+                      width={300}
+                      height={300}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                  </div>
+                  <div className="p-6">
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">
+                      <Link href={`/product/${product.slug}`} className="hover:text-indigo-600 transition-colors duration-200">
+                        {product.name}
+                      </Link>
+                    </h4>
+                    <p className="text-xl font-bold text-indigo-600">
+                      {currency} {convertPrice(product.price).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Spin-to-Win Button */}
+        <div className="fixed bottom-20 right-4 z-50">
+          <button
+            onClick={() => setShowSpinGame(true)}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-full shadow-lg transition-colors"
+          >
+            <Gift className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Spin-to-Win Popup */}
+        {showSpinGame && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-8 rounded-xl max-w-md w-full mx-4">
+              <h3 className="text-2xl font-bold mb-4">Spin to Win!</h3>
+              <p className="mb-4">Spin the wheel for a chance to win discounts!</p>
+
+              {/* Spinning Wheel */}
+              <div className="flex justify-center mb-4">
+                <div
+                  className={`w-32 h-32 rounded-full border-8 border-yellow-400 flex items-center justify-center text-2xl font-bold transition-transform duration-2000 ${
+                    isSpinning ? 'animate-spin' : ''
+                  }`}
+                  style={{
+                    background: 'conic-gradient(from 0deg, #fbbf24, #f59e0b, #d97706, #b45309, #92400e, #fbbf24)',
+                  }}
+                >
+                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center">
+                    {spinResult ? (
+                      <span className="text-green-600 font-bold">{spinResult}</span>
+                    ) : (
+                      <Gift className="w-8 h-8 text-yellow-500" />
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <button
+                  onClick={() => setShowSpinGame(false)}
+                  className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={handleSpin}
+                  disabled={isSpinning}
+                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
+                >
+                  {isSpinning ? 'Spinning...' : 'Spin Now'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Sticky Bottom Nav for Mobile */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
+        <div className="flex justify-around py-2">
+          <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+            <Home className="w-6 h-6" />
+            <span className="text-xs">Home</span>
+          </Link>
+          <Link href="/product" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+            <ShoppingCart className="w-6 h-6" />
+            <span className="text-xs">Shop</span>
+          </Link>
+          <Link href="/wishlist" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+            <Heart className="w-6 h-6" />
+            <span className="text-xs">Wishlist</span>
+          </Link>
+          <Link href="/profile" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+            <User className="w-6 h-6" />
+            <span className="text-xs">Profile</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

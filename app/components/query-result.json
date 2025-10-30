@@ -1,0 +1,528 @@
+[
+   {
+    "_id": "QfWSoQ6hApDmyxTQJrk9cb",
+    "categoryName": "Men",
+    "description": "Elite Tuxedo.",
+    "imageUrl": "https://i.pinimg.com/1200x/03/8f/a6/038fa6af3aaa9f9ce36a25360e0296e2.jpg",
+    "name": "Elite Tuxedo",
+    "price": 165,
+    "slug": "elite-tuxedo"
+  },
+  {
+    "_id": "QfWSoQ6hApDmyxTQJrkaw9",
+    "categoryName": "Kids",
+    "description": "Comfortable cotton hoodie for kids.",
+    "imageUrl": "https://comfrt.com/fast-image/comfrt/files/1_32.jpg?v=1738018774",
+    "name": "Kids Cotton Hoodie",
+    "price": 50,
+    "slug": "kids-cotton-hoodie"
+  },
+  {
+    "_id": "sYszBmDM8iLQBJ9T002JGI",
+    "categoryName": "Men",
+    "description": "Perfectly tailored suit classic navy.",
+    "imageUrl": "https://i.pinimg.com/736x/1e/bb/d2/1ebbd2e458996823a010661c2491b648.jpg",
+    "name": "Tailored Suit Classic Navy",
+    "price": 165,
+    "slug": "tailored-suit-classic-navy"
+  },
+  {
+    "_id": "sYszBmDM8iLQBJ9T002JYI",
+    "categoryName": "Women",
+    "description": "Elegant deep emerald green gown.",
+    "imageUrl": "https://i.pinimg.com/736x/44/68/86/4468863df6bab63599738e7aba0b9033.jpg",
+    "name": "Silk Evening Dress",
+    "price": 320,
+    "slug": "silk-evening-dress"
+  },
+  {
+    "_id": "QfWSoQ6hApDmyxTQJrk9Sv",
+    "categoryName": "Men",
+    "description": "Men's Winter Fleece.",
+    "imageUrl": "https://i.pinimg.com/736x/b4/03/b5/b403b5ddb03952fcc76a3cc4f723e248.jpg",
+    "name": "Men's Winter Fleecer",
+    "price": 245,
+    "slug": "Winter-Fleece"
+  },
+  {
+    "_id": "QfWSoQ6hApDmyxTQJrk9Xl",
+    "categoryName": "Men",
+    "description": "A timeless white T-shirt perfect for any occasion.",
+    "imageUrl": "https://i.pinimg.com/1200x/32/03/6a/32036a421e0c0273c3ebadd0a5a49e93.jpg",
+    "name": "Classic White T-shirtt",
+    "price": 89,
+    "slug": "classic-white-t-shirt"
+  },
+  {
+    "_id": "QfWSoQ6hApDmyxTQJrk9oh",
+    "categoryName": "Kids",
+    "description": "Comfortable Wear for kids.",
+    "imageUrl": "https://i.pinimg.com/736x/22/07/2b/22072b4cac4c0112a1e468710dc67e26.jpg",
+    "name": "Kids Comfortable Wear ",
+    "price": 50,
+    "slug": "kids-Comfortable-Wear"
+  },
+   {
+    "_id": "QfWSoQ6hApDmyxTQJrkaot",
+    "categoryName": "Men",
+    "description": "A timeless white shirt perfect for any occasion.",
+    "imageUrl": "https://i.pinimg.com/736x/66/7c/1e/667c1e749701608acd7ee180ed16a4b3.jpg",
+    "name": "Classic Black T-shirt",
+    "price": 89,
+    "slug": "classic-black-T-shirt"
+  },
+  {
+    "_id": "sYszBmDM8iLQBJ9T001j2n",
+    "categoryName": "Women",
+    "description": "Floral print Shirt",
+    "imageUrl": "https://i.pinimg.com/736x/fc/11/c6/fc11c630f290ac1ed681c6a879fd28ea.jpg",
+    "name": "Floral Print Shirt",
+    "price": 320,
+    "slug": "floral-print-shirt"
+  },
+  {
+    "_id": "d7672070-ba9d-43ad-8aa7-e5dad763a133",
+    "categoryName": "Kids",
+    "description": "The Kids Jump Suit is the ultimate blend of comfort and style, designed for active little ones. Crafted from soft, durable fabric, this jumpsuit features a relaxed fit and an elastic waistband for easy wear. The playful design includes vibrant colors and fun prints, making it perfect for playdates, outings, or casual gatherings. With short sleeves and breathable material, it ensures your child stays cool and comfortable all day long. Pair it with sneakers for a complete look that\u00e2\u20ac\u2122s ready for adventure!\n\n",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/d7a1767aebd9d31c2930d1b3bb517feb0ad22223-736x903.png",
+    "name": "Kids Jump Suit",
+    "price": "$29.99",
+    "slug": "kids-jump-suit"
+  },
+  {
+    "_id": "5f182dad-ad7a-4c30-868d-26a778650a11",
+    "categoryName": "Kids",
+    "description": "The Kids Casual Dress combines comfort and style, perfect for everyday wear. Made from soft, breathable fabric, this dress features a playful design with bright colors and fun patterns. The lightweight and easy-to-wear style allows for freedom of movement, making it great for playdates, parties, or family outings. Pair it with sneakers or sandals for a chic and effortless look!\n\n",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/71319979f829a836adff3fc68ab0ebcda915f60f-564x745.png",
+    "name": "Kids Casual Dress",
+    "price": "$29.97",
+    "slug": "kids-casual-dress"
+  },
+  {
+    "_id": "198516ae-063e-4e24-8a2b-9c6b0865cd3c",
+    "categoryName": "Kids",
+    "description": "Our Kids Shorts are perfect for active little ones! Made from soft, breathable fabric, these shorts feature an elastic waistband for comfort and easy dressing. Lightweight and durable, they come in vibrant colors and fun patterns, making them ideal for playdates and summer adventures. Pair them with t-shirts or tank tops for a stylish and casual look!",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/f01bbb4aed88d1ab2441262cd49f9e6d0899d59d-564x846.png",
+    "name": "Kids Shorts",
+    "price": "$19.98",
+    "slug": "kids-shorts"
+  },
+  {
+    "_id": "sYszBmDM8iLQBJ9T002J7I",
+    "categoryName": "Men",
+    "description": "Luxurious cashmere Turtle neck for the discerning gentleman.",
+    "imageUrl": "https://i.pinimg.com/736x/1c/fa/73/1cfa7321aeb31db682b8556e900691ab.jpg",
+    "name": "Turtle Neck Cashmere Sweater",
+    "price": 245,
+    "slug": "Turtle-neck-cashmere-sweater"
+  },
+  {
+    "_id": "775361d0-461e-4859-bed7-39494e060b56",
+    "categoryName": "Women",
+    "description": "Elevate your casual wardrobe with our Polo Button-Down Shirt, a versatile staple that seamlessly blends comfort and style. Crafted from premium, breathable cotton, this shirt ensures a soft touch against the skin while providing all-day wearability.\n\nFeaturing a classic button-down collar, this shirt offers a polished look perfect for both casual outings and smart-casual events. The subtle polo detailing adds a sporty twist, making it an excellent choice for any occasion.\n\nWith a tailored fit that flatters the silhouette and a variety of colors to choose from, the Polo Button-Down Shirt is designed to suit every style preference. Pair it with chinos for a refined look or with jeans for a laid-back vibe.\n\nExperience the perfect combination of sophistication and ease with our Polo Button-Down Shirt\u00e2\u20ac\u201dan essential addition to any modern man's wardrobe.",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/9b3b9dbc97bd1eb57809e7f6527bb869c8459b39-564x705.png",
+    "name": "Polo Botton Down Shirt",
+    "price": "$39.99",
+    "slug": "polo-botton-down-shirt"
+  },
+  {
+    "_id": "a6fe4ab3-a6f0-4143-8734-473f58c07a84",
+    "categoryName": "Women",
+    "description": "Introducing the Italian Tassel Wool Coat, a statement piece that embodies timeless elegance and sophisticated craftsmanship. This luxurious coat is made from high-quality wool, ensuring warmth and comfort during the colder months. Its tailored silhouette flatters the figure, featuring a refined lapel collar and a single-breasted design.\n\nThe standout feature of this coat is its chic tassel detailing, adding a touch of artistic flair that sets it apart from traditional outerwear. Available in a rich, classic color palette, this coat effortlessly complements both formal and casual ensembles.\n\nWith spacious pockets for practicality and a sleek lining for a smooth finish, the Italian Tassel Wool Coat is the perfect blend of style and functionality. Elevate your outerwear collection with this exquisite piece, ideal for city strolls, business meetings, or evening events.\n\n",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/28612edb6516ef4dbce9ff1f515b45caa06760c8-235x380.png",
+    "name": "Italian Tassel Wool Coat",
+    "price": "$29.99",
+    "slug": "italian-tassel-wool-coat"
+  },
+  {
+    "_id": "6be40d33-84e8-403b-a8bb-2b400292457b",
+    "categoryName": "Women",
+    "description": "Elevate your wardrobe with our Elegant Tweed Dress, a perfect blend of sophistication and classic style. Crafted from premium tweed fabric, this dress features a flattering silhouette that accentuates the waist while offering a comfortable fit. The timeless design includes a round neckline, short sleeves, and a knee-length hem, making it suitable for both formal occasions and casual outings. The intricate texture of the tweed adds depth and character, while the versatile color palette allows for easy styling. Pair it with heels for a polished look or with ankle boots for a more relaxed vibe. Embrace elegance with this chic tweed dress that promises to turn heads wherever you go.\n\n",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/18332d3c55a26fb3c15bfc37f507dd642c2900f1-474x711.png",
+    "name": "Tweed Dress",
+    "price": "$39.99",
+    "slug": "tweed-dress"
+  },
+  {
+    "_id": "38e77aea-8d22-4da2-8580-299f89bfdf2f",
+    "categoryName": "Women",
+    "description": "Step out in style with our Classic Trench Coat, a timeless outerwear piece that effortlessly combines elegance and functionality. Crafted from high-quality, durable fabric, this coat features a double-breasted front, belted waist, and stylish epaulettes, giving it a sophisticated silhouette. The knee-length design provides ample coverage, making it perfect for any season. Whether you're dressing up for a formal event or layering over a casual outfit, this trench coat is versatile enough to suit any occasion. Available in classic neutral tones, it pairs beautifully with dresses, jeans, or tailored pants. Embrace the charm of the trench coat and make it your go-to staple for an effortlessly chic look.",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/2e11e7904b5873c7616177dd83c77b38300904c8-736x1104.png",
+    "name": "Trench Coat",
+    "price": "$49.99",
+    "slug": "trench-coat"
+  },
+  {
+    "_id": "a08c558d-9be2-4784-b454-8e82a01b500e",
+    "categoryName": "Men",
+    "description": "Elevate your wardrobe with our Striped Oversized Shirt, designed for ultimate comfort and effortless style. This shirt features a relaxed fit with bold, vertical stripes that add a modern touch to your look. Made from soft, breathable fabric, it drapes beautifully and pairs perfectly with jeans, shorts, or leggings. Ideal for casual outings or laid-back office days, this versatile piece can be styled with a knot at the waist or worn loose for an easygoing vibe. Make a statement in this chic essential that combines comfort and fashion effortlessly.",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/502d01a45ecac669baec29aa5403ecaec97e9799-564x846.png",
+    "name": "Black Sweater",
+    "price": "$39.99",
+    "slug": "black-sweater"
+  },
+  {
+    "_id": "4b311c07-01fb-4664-92a8-441096ed36c9",
+    "categoryName": "Men",
+    "description": "Discover our stylish casual wear collection, perfect for laid-back weekends and everyday outings. Featuring relaxed-fit T-shirts, comfy jeans, and versatile footwear, each piece is designed for comfort and effortless style. Mix and match vibrant colors and trendy prints to create your unique look, whether you're enjoying brunch with friends or running errands. Complete your outfit with stylish accessories for a touch of personality. Embrace comfort and fashion with our must-have casual wear!",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/b205ad944f8c2a8a3b9b3469b05e65e759713b07-735x1054.png",
+    "name": "Stylish Casual Wear",
+    "price": "$29.99",
+    "slug": "stylish-casual-wear"
+  },
+  {
+    "_id": "03ee01f7-a27e-4f70-a61b-23c529daa82f",
+    "categoryName": "Men",
+    "description": "Introducing the Denime Button-Down Shirt, a timeless classic that effortlessly combines style and versatility. Made from high-quality denim, this shirt features a comfortable fit with a classic collar and long sleeves, making it perfect for any occasion. The button-down front adds a polished touch, while the denim fabric provides durability and a laid-back vibe.\n\nWith its rich indigo hue and subtle wash details, this shirt pairs beautifully with everything from chinos to your favorite jeans. Whether worn tucked in for a smart-casual look or relaxed over a t-shirt, the Denime Button-Down Shirt is a wardrobe essential that showcases your effortless sense of style. Dress it up with accessories for a night out or keep it casual for a day of errands\u00e2\u20ac\u201dthis shirt has got you covered",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/341699072d7a917f446d16a44f78264789225067-564x846.png",
+    "name": "Denime Jacket",
+    "price": "$39.99",
+    "slug": "denime-jacket"
+  },
+  {
+    "_id": "d7dc2e67-f16f-424c-b5e3-5d8e145dadcb",
+    "categoryName": "Men",
+    "description": "Elevate your wardrobe with this stylish white shirt, emblazoned with the iconic \"Vogue\" logo. Crafted from soft, breathable cotton, this shirt offers all-day comfort while making a bold fashion statement. The minimalist design features a classic crew neckline and a relaxed fit, making it perfect for casual outings or layering under jackets and cardigans. Whether you're pairing it with jeans for a laid-back look or dressing it up with a skirt, this versatile piece is sure to turn heads. Embrace your inner fashionista and showcase your love for style with this must-have addition to your collection",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/d4d40c3f456735558a85a0324b724060fb173f13-736x908.png",
+    "name": "Vogue T-Shirt",
+    "price": "$29.99",
+    "slug": "vogue-t-shirt"
+  },
+  {
+    "_id": "8b0ba179-7f6d-4f24-ac0a-76bf1a84356f",
+    "categoryName": "Men",
+    "description": "Elevate your wardrobe with the timeless and eco-friendly LYOCELL \u00e2\u20ac\u201c Linen Shirt. Crafted from a blend of premium lyocell and linen fabrics, this shirt offers an unbeatable combination of comfort, breathability, and sustainability. The lyocell material ensures a soft, silky feel against the skin, while the linen adds a lightweight and natural texture, making it perfect for warmer weather.\n",
+    "imageUrl": "https://cdn.sanity.io/images/7p0muvi9/production/4939a7ff85f9d448a1b6a355e4b7572b36d178c2-564x564.png",
+    "name": "LYOCELL \u00e2\u20ac\u201c LINEN SHIRT",
+    "price": "$19.99",
+    "slug": "lyocell-linen-shirt"
+  },
+  {
+    "_id": "new-product-1",
+    "categoryName": "Men",
+    "description": "Premium quality shirt with modern design and comfortable fit.",
+    "imageUrl": "https://i.pinimg.com/1200x/0f/6d/ad/0f6dad5e947ba2037a3e30aab0021d7f.jpg",
+    "name": "Modern Premium Shirt",
+    "price": 199,
+    "slug": "modern-premium-shirt"
+  },
+  {
+    "_id": "new-product-2",
+    "categoryName": "Men",
+    "description": "Elegant and stylish shirt perfect for any occasion.",
+    "imageUrl": "https://www.warasibe.com/cdn/shop/files/11fbda4ea6143629b0aa90dd7a067557.jpg?v=1758019303",
+    "name": "Elegant Style Shirt",
+    "price": 249,
+    "slug": "elegant-style-shirt"
+  },
+  {
+    "_id": "rolex-submariner-001",
+    "categoryName": "Men",
+    "description": "The Rolex Submariner is a legendary dive watch known for its robustness, water resistance up to 300 meters, and iconic design. Featuring a ceramic bezel and automatic movement, it's perfect for adventurers and collectors alike.",
+    "imageUrl": "https://i.pinimg.com/1200x/0f/6d/ad/0f6dad5e947ba2037a3e30aab0021d7f.jpg",
+    "name": "Rolex Submariner",
+    "price": 8000,
+    "slug": "rolex-submariner"
+  },
+  {
+    "_id": "rolex-datejust-001",
+     "categoryName": "Top picks",
+    "description": "The Rolex Datejust is a classic timepiece that combines elegance and precision. With its fluted bezel, automatic movement, and date complication, it's a versatile watch suitable for both formal and casual occasions.",
+    "imageUrl": "https://www.warasibe.com/cdn/shop/files/11fbda4ea6143629b0aa90dd7a067557.jpg?v=1758019303",
+    "name": "Rolex Datejust",
+    "price": 7500,
+    "slug": "rolex-datejust"
+  },
+  {
+    "_id": "luxury-perfume-001",
+    "categoryName": "Top picks",
+    "description": "A luxurious fragrance that captivates with its elegant notes and long-lasting scent. Perfect for special occasions or everyday elegance.",
+    "imageUrl": "https://i.pinimg.com/1200x/27/0b/18/270b1869f135994b8f36f531c2b876b6.jpg",
+    "name": "Luxury Perfume",
+    "price": 150,
+    "slug": "luxury-perfume"
+  },
+  {
+    "_id": "aston-martin-db12",
+    "categoryName": "Luxury",
+    "description": "The Aston Martin DB12 is a grand tourer that combines breathtaking performance with unparalleled luxury. Powered by a twin-turbocharged 4.0-liter V8 engine producing 680 hp, it accelerates from 0-60 mph in just 3.1 seconds. The interior features premium leather, advanced technology, and meticulous craftsmanship.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/4e/5c/d6/4e5cd6844136d8b5d11300d60c0c0619.mp4",
+    "name": "ASTON MARTIN DB12",
+    "price": 350000,
+    "slug": "aston-martin-db12"
+  },
+  {
+    "_id": "mclaren-570s",
+    "categoryName": "Luxury",
+    "description": "The McLaren 570S is a high-performance sports car that delivers supercar thrills at an accessible price point. Featuring a twin-turbocharged 3.8-liter V8 engine with 562 hp, it offers blistering acceleration and precise handling. The lightweight carbon fiber construction and aerodynamic design make it a track-ready machine.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/8d/b5/d7/8db5d723f96cc05bb4e8e7678d2b5fc1.mp4",
+    "name": "Mclaren 570S",
+    "price": 220000,
+    "slug": "mclaren-570s"
+  },
+  {
+    "_id": "ferrari-f8-spider",
+    "categoryName": "Luxury",
+    "description": "The Ferrari F8 Spider is the ultimate open-top supercar experience. With a mid-mounted 3.9-liter twin-turbo V8 engine delivering 710 hp, it combines raw power with the thrill of open-air driving. The retractable hardtop allows you to enjoy the Ferrari soundtrack while maintaining the elegance of a convertible.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/d5/b9/50/d5b950936ff5da14a995da5d052765fa.mp4",
+    "name": "Ferrari F8 Spider",
+    "price": 380000,
+    "slug": "ferrari-f8-spider"
+  },
+  {
+    "_id": "rolls-royce-phantom-series-ii",
+    "categoryName": "Luxury",
+    "description": "Timeless craftsmanship meets modern elegance. Experience the pinnacle of luxury.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/36/45/bd/3645bd16d43723c3c48edd8407bf1ec3.mp4",
+    "name": "ROLLS-ROYCE PHANTOM SERIES II",
+    "price": 500000,
+    "slug": "rolls-royce-phantom-series-ii"
+  },
+  {
+    "_id": "bentley-continental-gt",
+    "categoryName": "Luxury",
+    "description": "Pure British luxury redefined. Grace, power, and sophistication in one frame.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/2c/dd/6c/2cdd6c6be47755dba680ea8ab88c4c81.mp4",
+    "name": "BENTLEY CONTINENTAL GT",
+    "price": 250000,
+    "slug": "bentley-continental-gt"
+  },
+  {
+    "_id": "Mclaren-Senna-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/4f/c1/ca/4fc1ca1a4c420317eab5238b8bfa1227.jpg",
+    "name": "Mclaren Senna",
+    "price": 450000,
+    "slug": "mclaren-senna"
+  },{
+    "_id": "LAMBORGHINI-REVUELTO-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/16/aa/4e/16aa4ee8d14b533d4c2da869fcf82bfa.jpg",
+    "name": "LAMBORGHINI REVUELTO",
+    "price": 450000,
+    "slug": "LAMBORGHINI-REVUELTO"
+  },{
+    "_id": "G-Wagon-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/e6/2f/da/e62fda85e7a61c359c9382fa690a2c8b.jpg",
+    "name": "G-Wagon",
+    "price": 450000,
+    "slug": "G-Wagon"
+  },{
+    "_id": "doge-charge-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/88/b9/3d/88b93d1379047573a15b2fd44e35f6b1.jpg",
+    "name": "Doge Charge",
+    "price": 450000,
+    "slug": "doge-charge"
+  },{
+    "_id": "PORSCHE-911-GT3 RS-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/6e/68/ae/6e68aeb93bbc408365f9395f9cce3d2d.jpg",
+    "name": "PORSCHE 911 GT3 RS",
+    "price": 450000,
+    "slug": "PORSCHE-911-GT3-RS"
+  },
+  {
+    "_id": "Mercedes-Benz-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/d7/aa/4a/d7aa4a4bbbef370652226b203336a2d7.jpg",
+    "name": "Mercedes Benz",
+    "price": 450000,
+    "slug": "Mercedes-Benz"
+  },{
+    "_id": "Mazda-Miata-video-001",
+    "categoryName": "Luxury",
+    "description": "Experience the epitome of automotive excellence with this stunning luxury vehicle showcase.",
+    "imageUrl": "https://i.pinimg.com/736x/52/1a/02/521a029b6106ac9245dbcc52d236b156.jpg",
+    "name": "Mazda Miata",
+    "price": 450000,
+    "slug": "Mazda-Miata"
+  },
+  {
+    "_id": "lv-bag-001",
+    "categoryName": "Top picks",
+    "description": "Iconic Louis Vuitton bag with timeless design and premium craftsmanship.",
+    "imageUrl": "https://i.pinimg.com/736x/91/6b/ba/916bba7925dd2f274f5791809e045ffc.jpg",
+    "name": "LV Bag",
+    "price": 2500,
+    "slug": "lv-bag"
+  },
+  {
+    "_id": "versace-bag-001",
+    "categoryName": "Top picks",
+    "description": "Bold and luxurious Versace bag featuring signature patterns and high-quality materials.",
+    "imageUrl": "https://i.pinimg.com/736x/c9/60/a9/c960a966d0364a016b696c56c452f7d6.jpg",
+    "name": "Versace Bag",
+    "price": 1800,
+    "slug": "versace-bag"
+  },
+  {
+    "_id": "fancy-bag-001",
+    "categoryName": "Top picks",
+    "description": "Elegant fancy bag perfect for special occasions, with intricate details.",
+    "imageUrl": "https://i.pinimg.com/1200x/fa/d5/66/fad566569aeac9a8eedc573f5dcb8074.jpg",
+    "name": "Fancy Bag",
+    "price": 1200,
+    "slug": "fancy-bag"
+  },
+  {
+    "_id": "fancy-bag-002",
+    "categoryName": "Top picks",
+    "description": "Stylish fancy bag with modern design and versatile appeal.",
+    "imageUrl": "https://i.pinimg.com/736x/e9/51/52/e95152b8781236e4ed5b59ec0a810c3b.jpg",
+    "name": "Fancy Bag",
+    "price": 1300,
+    "slug": "fancy-bag-2"
+  },
+  {
+    "_id": "dior-bag-001",
+    "categoryName": "Top picks",
+    "description": "Sophisticated Dior bag embodying luxury and elegance.",
+    "imageUrl": "https://i.pinimg.com/1200x/23/50/d6/2350d6c3d0f6a9b49b677d437e2cb358.jpg",
+    "name": "Dior Bag",
+    "price": 2200,
+    "slug": "dior-bag"
+  },
+  {
+    "_id": "gucci-velzura-bag-001",
+    "categoryName": "Top picks",
+    "description": "Gucci VELZURA Bag with iconic GG pattern and premium leather.",
+    "imageUrl": "https://i.pinimg.com/1200x/3c/02/eb/3c02eb1186108902c19f849df74d28ae.jpg",
+    "name": "Gucci VELZURA Bag",
+    "price": 1900,
+    "slug": "gucci-velzura-bag"
+  },
+  {
+    "_id": "parada-bag-001",
+    "categoryName": "Top picks",
+    "description": "Unique Parada bag with distinctive style and craftsmanship.",
+    "imageUrl": "https://i.pinimg.com/736x/40/7d/ee/407deef455d490f2db0a13cf7b0c25ce.jpg",
+    "name": "Parada Bag",
+    "price": 1500,
+    "slug": "parada-bag"
+  },
+  {
+    "_id": "chanel-clutch-bag-001",
+    "categoryName": "Top picks",
+    "description": "Circa 2014 Chanel limited edition clutch bag, a rare collectible.",
+    "imageUrl": "https://i.pinimg.com/1200x/05/3a/d8/053ad860a4c0c6a59d405e8c568dbbf9.jpg",
+    "name": "Chanel Clutch Bag",
+    "price": 3000,
+    "slug": "chanel-clutch-bag"
+  },
+  {
+    "_id": "cruise-booking-001",
+    "categoryName": "booking",
+    "description": "Luxury cruise ship membership for unforgettable voyages.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/7f/3a/e5/7f3ae52c4d8ea53ca1f09881db55fca0.mp4",
+    "name": "Cruise",
+    "price": 5000,
+    "slug": "cruise-booking"
+  },
+  {
+    "_id": "ski-booking-001",
+    "categoryName": "booking",
+    "description": "Skiing mountain club membership for winter adventures.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/90/bf/41/90bf4119c7db4a80ecabdb88178413a0.mp4",
+    "name": "Ski",
+    "price": 3000,
+    "slug": "ski-booking"
+  },
+  {
+    "_id": "trophy-hunting-booking-001",
+    "categoryName": "booking",
+    "description": "Trophy hunting club for elite adventures.",
+    "imageUrl": "https://i.pinimg.com/736x/59/6f/70/596f70ac9a4dcf35afc27b188800aa4d.jpg",
+    "name": "Trophy Hunting Club",
+    "price": 10000,
+    "slug": "trophy-hunting-booking"
+  },
+  {
+    "_id": "elite-jetski-booking-001",
+    "categoryName": "booking",
+    "description": "Elite Jetski club for thrilling water experiences.",
+    "imageUrl": "/videos/jetskieclub.mp4",
+    "name": "Elite Jetski Club",
+    "price": 2000,
+    "slug": "elite-jetski-booking"
+  },
+  {
+    "_id": "elite-hiking-booking-001",
+    "categoryName": "booking",
+    "description": "Elite hiking club for nature enthusiasts.",
+    "imageUrl": "https://i.pinimg.com/736x/54/fd/33/54fd33354ec15965d6fb4c7488308e02.jpg",
+    "name": "Elite Hiking Club",
+    "price": 1500,
+    "slug": "elite-hiking-booking"
+  },
+  {
+    "_id": "elite-camping-booking-001",
+    "categoryName": "booking",
+    "description": "Elite camping club for night campsite adventures.",
+    "imageUrl": "https://v1.pinimg.com/videos/mc/720p/65/90/25/659025823fd98f6409ff007b17f9d966.mp4",
+    "name": "Elite Camping Club",
+    "price": 1200,
+    "slug": "elite-camping-booking"
+  },
+  {
+    "_id": "elite-winter-resorts-booking-001",
+    "categoryName": "booking",
+    "description": "Elite winter resorts membership for luxury winter getaways.",
+    "imageUrl": "/videos/lux resort winter.mp4",
+    "name": "Elite Winter Resorts Membership",
+    "price": 4000,
+    "slug": "elite-winter-resorts-booking"
+  },
+  {
+    "_id": "luxury-resorts-booking-001",
+    "categoryName": "booking",
+    "description": "Luxury resorts club for ultimate relaxation.",
+    "imageUrl": "/videos/lux resorts.mp4",
+    "name": "Luxury Resorts Club",
+    "price": 3500,
+    "slug": "luxury-resorts-booking"
+  },
+  {
+    "_id": "private-jet-booking-001",
+    "categoryName": "booking",
+    "description": "Fly Beyond Limits ✈️",
+    "imageUrl": "/videos/jet.mp4",
+    "name": "Private Jet",
+    "price": 15000,
+    "slug": "private-jet-booking"
+  },
+  {
+    "_id": "luxury-yacht-booking-001",
+    "categoryName": "booking",
+    "description": "Sail in Style ⛵",
+    "imageUrl": "/videos/yatch.mp4",
+    "name": "Luxury Yacht",
+    "price": 25000,
+    "slug": "luxury-yacht-booking"
+  },
+  {
+    "_id": "helicopter-tour-booking-001",
+    "categoryName": "booking",
+    "description": "Sky High Adventures 🚁",
+    "imageUrl": "/videos/helicopter.mp4",
+    "name": "Helicopter Tour",
+    "price": 5000,
+    "slug": "helicopter-tour-booking"
+  },
+  {
+    "_id": "charter-plane-booking-001",
+    "categoryName": "booking",
+    "description": "Private charter flights for ultimate luxury travel ✈️",
+    "imageUrl": "/videos/charter plane.mp4",
+    "name": "Charter Plane",
+    "price": 12000,
+    "slug": "charter-plane-booking"
+  }
+]

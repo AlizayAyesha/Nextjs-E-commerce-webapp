@@ -70,14 +70,19 @@ export default function ShoppingCart({ onContinueShopping }: ShoppingCartProps) 
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => {}}> {/* Provide a toggle function if necessary */}
       <SheetTrigger asChild>
-        <div className="flex items-center gap-4 p-5 rounded-md bg-transparent hover:bg-white hover:bg-opacity-10 transition duration-300 cursor-pointer">
-          <ShoppingBag className="h-10 w-10 text-white" />
+        <div className="flex items-center gap-4 p-5 rounded-md bg-transparent hover:bg-white hover:bg-opacity-10 hover:scale-105 transition-all duration-300 cursor-pointer relative">
+          <ShoppingBag className="h-10 w-10 text-black" />
           <span className="text-xs font-semibold text-white">Cart</span>
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {cartCount}
+            </span>
+          )}
         </div>
       </SheetTrigger>
-      <SheetContent className="sm:max-w-lg w-[90vw]">
+      <SheetContent className="sm:max-w-lg w-[90vw] bg-white shadow-2xl">
         <SheetHeader>
-          <SheetTitle>Shopping Cart</SheetTitle>
+          <SheetTitle className="text-2xl font-bold text-gray-800">Shopping Cart</SheetTitle>
         </SheetHeader>
         <div className="h-full flex flex-col justify-between">
           <div className="mt-8 flex-1 overflow-y-auto">
@@ -93,7 +98,7 @@ export default function ShoppingCart({ onContinueShopping }: ShoppingCartProps) 
                     <li key={entry.id} className="flex py-6 overflow-hidden rounded-md border border-gray-200">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <Image
-                          src={entry.image as string}
+                          src={(entry.image as string) || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
                           alt={entry.name}
                           width={100}
                           height={100}
@@ -140,14 +145,14 @@ export default function ShoppingCart({ onContinueShopping }: ShoppingCartProps) 
           </div>
           <div className="px-4 py-6 sm:px-6">
             <button
-              onClick={onContinueShopping} 
-              className="w-full bg-primary text-white py-2 rounded-md hover:bg-primary/80 transition duration-300"
+              onClick={onContinueShopping}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 hover:scale-105 transition-all duration-300 font-semibold"
             >
               Continue Shopping
             </button>
             <button
               onClick={() => router.push('/checkout')}
-              className="mt-4 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-500 transition duration-300"
+              className="mt-4 w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 hover:scale-105 transition-all duration-300 font-semibold"
             >
               Checkout
             </button>

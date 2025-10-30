@@ -1,10 +1,12 @@
 import type { Metadata } from "next"; // Keep metadata import in this Server Component
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/Navbar";
 import CartProvider from "./components/Providers";
-import React from "react"; // Remove useState import
-import Footer from "./components/Footer";
+import LayoutWrapper from "./components/LayoutWrapper";
+import { CurrencyProvider } from "./context/CurrencyContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import { CompareProvider } from "./context/CompareContext";
+import { WishlistProvider } from "./context/WishlistContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,11 +34,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <CartProvider>
-          <Navbar /> {/* Pass the function to open modal */}
-          {children} {/* Renders the content of each page */}
-         <Footer/>
-        </CartProvider>
+        <ThemeProvider>
+          <CurrencyProvider>
+            <CompareProvider>
+              <WishlistProvider>
+                <CartProvider>
+                  <LayoutWrapper>
+                    {children}
+                  </LayoutWrapper>
+                </CartProvider>
+              </WishlistProvider>
+            </CompareProvider>
+          </CurrencyProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

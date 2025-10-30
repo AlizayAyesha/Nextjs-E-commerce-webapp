@@ -1,17 +1,9 @@
-import { createClient } from '@sanity/client';
-import { urlFor } from '@/lib/utils';
+import productsData from '../../components/query-result.json';
 import { Truck } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import AddToBag from '@/app/components/AddToBag';
+import { Button } from '../../components/ui/button';
+import AddToBag from '../../components/AddToBag';
 import Link from 'next/link';
 import Image from 'next/image';
-
-const client = createClient({
-  projectId: '7p0muvi9',
-  dataset: 'production',
-  apiVersion: '2024-10-09',
-  useCdn: true,
-});
 
 interface ProductPageProps {
   params: {
@@ -20,19 +12,15 @@ interface ProductPageProps {
 }
 
 async function getData(slug: string) {
-  const query = `*[_type == "product" && slug.current == $slug][0] {
-    _id,
-    image,
-    price,
-    name,
-    description,
-    "categoryName": category->name,
-    sku // Include the sku here
-  }`;
-
-  const params = { slug };
-  const data = await client.fetch(query, params);
-  return data;
+  const product = productsData.find(p => p.slug === slug);
+  if (product) {
+    return {
+      ...product,
+      price: typeof product.price === 'string' ? parseFloat(product.price.replace('$', '')) : product.price,
+      sku: product._id, // Use _id as sku since JSON doesn't have sku
+    };
+  }
+  return null;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -48,11 +36,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className='bg-white'>
       <div className='mx-auto max-w-screen-xl px-4 md:px-8'>
         <div className='grid gap-8 md:grid-cols-2'>
-          {/* Image and Sale Tag Container */}
+          {/* Image/Video and Sale Tag Container */}
           <div className="relative">
-            {data.image && (
+            {data.imageUrl && data.imageUrl.includes('.mp4') ? (
+              <video
+                src={data.imageUrl}
+                className="w-full h-auto rounded-lg mb-4"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : (
               <Image
-                src={urlFor(data.image).url()}
+                src={data.imageUrl || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDUwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZSBBdmFpbGFibGU8L3RleHQ+Cjwvc3ZnPg=='}
                 alt={data.name}
                 width={500}
                 height={300}
@@ -109,20 +107,30 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </div>
 
               <div className='flex gap-2.5'>
-                <AddToBag 
-                  sku={data.sku} // Pass the sku here
-                  currency='USD' 
-                  description={data.description} 
-                  image={urlFor(data.image).url()} 
-                  name={data.name} 
-                  price={data.price} 
-                  key={data._id}
-                />
-                <Link href="/checkout" passHref>
-                  <Button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
-                    Check Out
-                  </Button>
-                </Link>
+                {data.categoryName === 'booking' ? (
+                  <Link href={`/booking/${data.slug}`} passHref>
+                    <Button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                      Book Now
+                    </Button>
+                  </Link>
+                ) : (
+                  <>
+                    <AddToBag
+                      sku={data.sku} // Pass the sku here
+                      currency='USD'
+                      description={data.description}
+                      image={data.imageUrl}
+                      name={data.name}
+                      price={data.price}
+                      key={data._id}
+                    />
+                    <Link href="/checkout" passHref>
+                      <Button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                        Check Out
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
 
               <p className='mt-12 text-base text-gray-500 tracking-wide'>{data.description}</p>

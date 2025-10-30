@@ -1,0 +1,25 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+exports.id = "vendor-chunks/es-set-tostringtag";
+exports.ids = ["vendor-chunks/es-set-tostringtag"];
+exports.modules = {
+
+/***/ "(ssr)/./node_modules/es-set-tostringtag/index.js":
+/*!**************************************************!*\
+  !*** ./node_modules/es-set-tostringtag/index.js ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("\n\nvar GetIntrinsic = __webpack_require__(/*! get-intrinsic */ \"(ssr)/./node_modules/get-intrinsic/index.js\");\n\nvar $defineProperty = GetIntrinsic('%Object.defineProperty%', true);\n\nvar hasToStringTag = __webpack_require__(/*! has-tostringtag/shams */ \"(ssr)/./node_modules/has-tostringtag/shams.js\")();\nvar hasOwn = __webpack_require__(/*! hasown */ \"(ssr)/./node_modules/hasown/index.js\");\nvar $TypeError = __webpack_require__(/*! es-errors/type */ \"(ssr)/./node_modules/es-errors/type.js\");\n\nvar toStringTag = hasToStringTag ? Symbol.toStringTag : null;\n\n/** @type {import('.')} */\nmodule.exports = function setToStringTag(object, value) {\n\tvar overrideIfSet = arguments.length > 2 && !!arguments[2] && arguments[2].force;\n\tvar nonConfigurable = arguments.length > 2 && !!arguments[2] && arguments[2].nonConfigurable;\n\tif (\n\t\t(typeof overrideIfSet !== 'undefined' && typeof overrideIfSet !== 'boolean')\n\t\t|| (typeof nonConfigurable !== 'undefined' && typeof nonConfigurable !== 'boolean')\n\t) {\n\t\tthrow new $TypeError('if provided, the `overrideIfSet` and `nonConfigurable` options must be booleans');\n\t}\n\tif (toStringTag && (overrideIfSet || !hasOwn(object, toStringTag))) {\n\t\tif ($defineProperty) {\n\t\t\t$defineProperty(object, toStringTag, {\n\t\t\t\tconfigurable: !nonConfigurable,\n\t\t\t\tenumerable: false,\n\t\t\t\tvalue: value,\n\t\t\t\twritable: false\n\t\t\t});\n\t\t} else {\n\t\t\tobject[toStringTag] = value; // eslint-disable-line no-param-reassign\n\t\t}\n\t}\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvZXMtc2V0LXRvc3RyaW5ndGFnL2luZGV4LmpzIiwibWFwcGluZ3MiOiJBQUFhOztBQUViLG1CQUFtQixtQkFBTyxDQUFDLGtFQUFlOztBQUUxQzs7QUFFQSxxQkFBcUIsbUJBQU8sQ0FBQyw0RUFBdUI7QUFDcEQsYUFBYSxtQkFBTyxDQUFDLG9EQUFRO0FBQzdCLGlCQUFpQixtQkFBTyxDQUFDLDhEQUFnQjs7QUFFekM7O0FBRUEsV0FBVyxhQUFhO0FBQ3hCO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsSUFBSTtBQUNKLElBQUk7QUFDSixnQ0FBZ0M7QUFDaEM7QUFDQTtBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbXktYXBwLy4vbm9kZV9tb2R1bGVzL2VzLXNldC10b3N0cmluZ3RhZy9pbmRleC5qcz9lYzg2Il0sInNvdXJjZXNDb250ZW50IjpbIid1c2Ugc3RyaWN0JztcblxudmFyIEdldEludHJpbnNpYyA9IHJlcXVpcmUoJ2dldC1pbnRyaW5zaWMnKTtcblxudmFyICRkZWZpbmVQcm9wZXJ0eSA9IEdldEludHJpbnNpYygnJU9iamVjdC5kZWZpbmVQcm9wZXJ0eSUnLCB0cnVlKTtcblxudmFyIGhhc1RvU3RyaW5nVGFnID0gcmVxdWlyZSgnaGFzLXRvc3RyaW5ndGFnL3NoYW1zJykoKTtcbnZhciBoYXNPd24gPSByZXF1aXJlKCdoYXNvd24nKTtcbnZhciAkVHlwZUVycm9yID0gcmVxdWlyZSgnZXMtZXJyb3JzL3R5cGUnKTtcblxudmFyIHRvU3RyaW5nVGFnID0gaGFzVG9TdHJpbmdUYWcgPyBTeW1ib2wudG9TdHJpbmdUYWcgOiBudWxsO1xuXG4vKiogQHR5cGUge2ltcG9ydCgnLicpfSAqL1xubW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiBzZXRUb1N0cmluZ1RhZyhvYmplY3QsIHZhbHVlKSB7XG5cdHZhciBvdmVycmlkZUlmU2V0ID0gYXJndW1lbnRzLmxlbmd0aCA+IDIgJiYgISFhcmd1bWVudHNbMl0gJiYgYXJndW1lbnRzWzJdLmZvcmNlO1xuXHR2YXIgbm9uQ29uZmlndXJhYmxlID0gYXJndW1lbnRzLmxlbmd0aCA+IDIgJiYgISFhcmd1bWVudHNbMl0gJiYgYXJndW1lbnRzWzJdLm5vbkNvbmZpZ3VyYWJsZTtcblx0aWYgKFxuXHRcdCh0eXBlb2Ygb3ZlcnJpZGVJZlNldCAhPT0gJ3VuZGVmaW5lZCcgJiYgdHlwZW9mIG92ZXJyaWRlSWZTZXQgIT09ICdib29sZWFuJylcblx0XHR8fCAodHlwZW9mIG5vbkNvbmZpZ3VyYWJsZSAhPT0gJ3VuZGVmaW5lZCcgJiYgdHlwZW9mIG5vbkNvbmZpZ3VyYWJsZSAhPT0gJ2Jvb2xlYW4nKVxuXHQpIHtcblx0XHR0aHJvdyBuZXcgJFR5cGVFcnJvcignaWYgcHJvdmlkZWQsIHRoZSBgb3ZlcnJpZGVJZlNldGAgYW5kIGBub25Db25maWd1cmFibGVgIG9wdGlvbnMgbXVzdCBiZSBib29sZWFucycpO1xuXHR9XG5cdGlmICh0b1N0cmluZ1RhZyAmJiAob3ZlcnJpZGVJZlNldCB8fCAhaGFzT3duKG9iamVjdCwgdG9TdHJpbmdUYWcpKSkge1xuXHRcdGlmICgkZGVmaW5lUHJvcGVydHkpIHtcblx0XHRcdCRkZWZpbmVQcm9wZXJ0eShvYmplY3QsIHRvU3RyaW5nVGFnLCB7XG5cdFx0XHRcdGNvbmZpZ3VyYWJsZTogIW5vbkNvbmZpZ3VyYWJsZSxcblx0XHRcdFx0ZW51bWVyYWJsZTogZmFsc2UsXG5cdFx0XHRcdHZhbHVlOiB2YWx1ZSxcblx0XHRcdFx0d3JpdGFibGU6IGZhbHNlXG5cdFx0XHR9KTtcblx0XHR9IGVsc2Uge1xuXHRcdFx0b2JqZWN0W3RvU3RyaW5nVGFnXSA9IHZhbHVlOyAvLyBlc2xpbnQtZGlzYWJsZS1saW5lIG5vLXBhcmFtLXJlYXNzaWduXG5cdFx0fVxuXHR9XG59O1xuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/es-set-tostringtag/index.js\n");
+
+/***/ })
+
+};
+;

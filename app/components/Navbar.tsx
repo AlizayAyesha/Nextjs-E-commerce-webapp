@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from "react"; 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ShoppingCart from "./ShoppingCart";
-import { useShoppingCart } from "use-shopping-cart";
-import { Menu, X } from "lucide-react"; 
+import { Menu, X, Sun, Moon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"; // Import dropdown menu components
+import { useCurrency } from "../context/CurrencyContext";
+import { useTheme } from "../context/ThemeContext";
 
 const links = [
   { name: 'Home', url: '/' },
@@ -23,12 +23,8 @@ const links = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // State to toggle mobile menu
   const pathname = usePathname();
-  const { handleCartClick } = useShoppingCart();
-
-  // Define the function to handle continuing shopping
-  const onContinueShopping = () => {
-    handleCartClick(); // Example: Close the cart
-  };
+  const { currency, setCurrency } = useCurrency();
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -37,13 +33,13 @@ export default function Navbar() {
       <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
         <Link href="/">
           <h1 className="text-2xl md:text-4xl font-bold">
-            Next<span className="text-green-500">Commerce</span>
+            LUX<span className="text-yellow-500">URY</span>
           </h1>
         </Link>
 
         {/* Hamburger Menu for mobile */}
         <button
-          className="block lg:hidden text-white"
+          className="block lg:hidden text-white hover:text-green-500 transition-colors duration-300"
           onClick={toggleMenu}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -71,11 +67,11 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {menuOpen && (
-          <nav className="flex flex-col absolute top-16 left-0 w-full bg-black lg:hidden">
+          <nav className="flex flex-col absolute top-16 left-0 w-full bg-white dark:bg-black lg:hidden">
             {links.map((link, idx) => (
-              <div key={idx} className="border-t border-gray-700">
+              <div key={idx} className="border-t border-gray-300 dark:border-gray-700">
                 <Link
-                  className="block py-4 px-6 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300"
+                  className="block py-4 px-6 text-lg font-semibold text-black dark:text-white hover:text-green-500 transition-colors duration-300"
                   href={link.url}
                   onClick={toggleMenu} // Close menu on link click
                 >
@@ -87,9 +83,29 @@ export default function Navbar() {
         )}
 
         <div className="flex items-center space-x-6">
-          <div className="flex" onClick={handleCartClick}>
-            <ShoppingCart onContinueShopping={onContinueShopping} /> {/* Pass the required prop */}
-          </div>
+          {/* Theme Toggle */}
+          <button onClick={toggleTheme} className="text-white hover:text-green-500 transition-colors duration-300">
+            {theme === 'light' ? <Moon size={24} /> : <Sun size={24} />}
+          </button>
+
+          {/* Currency Selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300 cursor-pointer">
+              {currency}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => setCurrency('USD')}>
+                USD
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setCurrency('EUR')}>
+                EUR
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setCurrency('PKR')}>
+                PKR
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Dropdown Menu for Sign Up/Sign In */}
           <DropdownMenu>
             {/* Trigger for Dropdown */}

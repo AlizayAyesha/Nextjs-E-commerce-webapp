@@ -70,3 +70,25 @@
   }
 }
 
+.slick-dots li button:before {
+  color: #d1d5db !important; /* soft gray */
+  opacity: 0.7;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #facc15 !important; /* golden dot */
+  opacity: 1;
+}
+
+.slick-slide {
+  transition: all 0.6s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+}

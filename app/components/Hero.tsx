@@ -6,33 +6,36 @@ import { ShoppingCart } from "lucide-react";
 import Link from 'next/link';
 
 const Hero = () => {
-  const videoUrl = "https://cdn.sanity.io/files/7p0muvi9/production/3de30ac087167a840a320764ce1f2b1937072f3d.mp4"; 
+  const videoUrl = "https://cdn.sanity.io/files/7p0muvi9/production/3de30ac087167a840a320764ce1f2b1937072f3d.mp4";
 
   return (
-    <section className="mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl lg:px-8">
-      <div className="mb-8 flex flex-wrap justify-between md:mb-16">
-        <div className="mb-6 flex w-full flex-col items-start sm:mb-12 lg:mb-0 lg:w-1/3 lg:pb-24 lg:pt-48">
-          <h1 className="mb-4 text-4xl font-bold text-black sm:text-5xl md:mb-9 md:text-6xl">
-            An Industrial Take on Streetwear
-          </h1>
-          <p className="mb-6 max-w-md leading-relaxed text-gray-800 xl:text-lg">
-            Anyone can beat you but no one can beat your outfit as long as you wear Dine outfits.
-          </p>
-          <Link href="/product">
-            <Button className="bg-slate-500 text-black hover:text-white">
-              <ShoppingCart className="mr-2 h-5 w-5" /> Start Shopping
-            </Button>
-          </Link>
-        </div>
+    <section className="relative bg-gradient-to-br from-gray-50 to-gray-200 py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
+              The Ultimate Destination for the <span className="text-yellow-500">Elite</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              Discover a realm of sophistication. From luxury bookings to high-end collections — live beyond ordinary.
+            </p>
+            <Link href="/product">
+              <Button className="bg-gradient-to-r from-yellow-500 to-blue-900 hover:from-yellow-600 hover:to-blue-800 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition-all duration-300 transform hover:scale-105">
+                <ShoppingCart className="mr-3 h-6 w-6" /> Start Shopping
+              </Button>
+            </Link>
+          </div>
 
-        <div className="w-full lg:w-1/2 relative">
-          <video
-            className="w-full h-auto rounded-lg"
-            src={videoUrl}
-            autoPlay
-            loop
-            muted
-          />
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl transform rotate-3 opacity-20"></div>
+            <video
+              className="relative w-full h-auto rounded-2xl shadow-2xl"
+              src={videoUrl}
+              autoPlay
+              loop
+              muted
+            />
+          </div>
         </div>
       </div>
     </section>

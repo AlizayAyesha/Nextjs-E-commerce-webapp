@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST = {__rewrites:{afterFiles:[{has:void 0,source:"\u002Fvideos\u002F:path*",destination:"\u002Fapp\u002Fcomponents\u002Fvideos\u002F:path*"}],beforeFiles:[],fallback:[]},sortedPages:["\u002F_app"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

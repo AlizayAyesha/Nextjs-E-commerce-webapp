@@ -1,0 +1,6 @@
+- [x] Create Testimonials.tsx component
+- [x] Create CTA.tsx component
+- [x] Create Service.tsx component
+- [x] Create Blog.tsx component
+- [x] Update app/page.tsx to include the new components
+- [x] Test the application to ensure sections render correctly above footer
