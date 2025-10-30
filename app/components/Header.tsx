@@ -12,9 +12,13 @@ interface HeaderProps {
   onContinueShopping: () => void;
 }
 
+type SearchResult =
+  | { type: 'category'; name: string; url: string }
+  | { type: 'product'; _id: string; categoryName: string; description: string; imageUrl: string; name: string; price: number | string; slug: string };
+
 export default function Header({ onContinueShopping }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const { handleCartClick } = useShoppingCart();
   const { compareCount } = useCompare();
@@ -26,15 +30,15 @@ export default function Header({ onContinueShopping }: HeaderProps) {
     if (query.length > 1) {
       // Import productsData from the JSON file
       const productsData = require('./query-result.json');
-      const categories = [...new Set(productsData.map((p: any) => p.categoryName))];
+      const categories = [...new Set(productsData.map((p: any) => p.categoryName))] as string[];
       const categoryResults = categories.filter((cat: string) =>
         cat.toLowerCase().includes(query.toLowerCase())
-      ).map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` }));
+      ).map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
 
       const productResults = productsData.filter((product: any) =>
         product.name.toLowerCase().includes(query.toLowerCase()) ||
         product.slug.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 3).map((product: any) => ({ type: 'product', ...product })); // Limit to 3 products
+      ).slice(0, 3).map((product: any) => ({ type: 'product', ...product } as const)); // Limit to 3 products
 
       setSearchResults([...categoryResults, ...productResults].slice(0, 5)); // Combine and limit to 5
     } else {
@@ -47,8 +51,8 @@ export default function Header({ onContinueShopping }: HeaderProps) {
     setIsFocused(true);
     if (searchResults.length === 0) {
       const productsData = require('./query-result.json');
-      const categories = [...new Set(productsData.map((p: any) => p.categoryName))];
-      const categoryResults = categories.map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` }));
+      const categories = [...new Set(productsData.map((p: any) => p.categoryName))] as string[];
+      const categoryResults = categories.map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
       setSearchResults(categoryResults.slice(0, 5)); // Show top 5 categories
     }
   };
