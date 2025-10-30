@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Heart, Bell, Clock, Gift, Home, ShoppingCart, User } from 'lucide-react';
+import { ArrowRight, Heart, Bell, Gift, Home, ShoppingCart, User, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Countdown from 'react-countdown';
 import productsData from './query-result.json';
 import { useCurrency } from '../context/CurrencyContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -32,6 +31,8 @@ export default function Newest() {
   const [showSpinGame, setShowSpinGame] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [spinResult, setSpinResult] = useState<string | null>(null);
+  const [showLuxuryPerfumePopup, setShowLuxuryPerfumePopup] = useState(false);
+  const [showSubscribePopup, setShowSubscribePopup] = useState(false);
   const { convertPrice, currency } = useCurrency();
   const { addToWishlist: addToWishlistContext, removeFromWishlist: removeFromWishlistContext, isInWishlist } = useWishlist();
 
@@ -72,7 +73,10 @@ export default function Newest() {
     const currentCategory = 'Men';
     const avgPrice = products.reduce((sum, p) => sum + p.price, 0) / products.length;
     const filtered = productsData
-      .filter((p) => p.categoryName === currentCategory || (Math.abs(p.price - avgPrice) < 50))
+      .filter((p) => {
+        const price = typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price;
+        return p.categoryName === currentCategory || Math.abs(price - avgPrice) < 50;
+      })
       .filter((p) => !products.some(prod => prod._id === p._id))
       .slice(0, 4)
       .map((p) => ({
@@ -81,6 +85,26 @@ export default function Newest() {
       }));
     setYouMayAlsoLike(filtered);
   }, [products]);
+
+  useEffect(() => {
+    // Show luxury perfume popup after 3 seconds
+    const timer1 = setTimeout(() => {
+      setShowLuxuryPerfumePopup(true);
+    }, 3000);
+
+    // Show subscribe popup after 10 seconds and then every 30 seconds
+    const timer2 = setTimeout(() => {
+      setShowSubscribePopup(true);
+      const interval = setInterval(() => {
+        setShowSubscribePopup(true);
+      }, 30000); // Every 30 seconds
+    }, 10000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
 
 
 
@@ -111,14 +135,6 @@ export default function Newest() {
   };
 
 
-
-  const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
-    return (
-      <span className="text-red-600 font-bold">
-        {days}d {hours}h {minutes}m {seconds}s
-      </span>
-    );
-  };
 
   return (
     <div className="bg-white py-16">
@@ -486,8 +502,76 @@ export default function Newest() {
             </div>
           </div>
         )}
-      </div>
 
+        {/* Luxury Perfume 70% Off Popup */}
+        {showLuxuryPerfumePopup && (
+          <div className="fixed left-4 top-1/2 transform -translate-y-1/2 bg-black text-white p-4 rounded-lg shadow-xl z-40 max-w-xs">
+            <button
+              onClick={() => setShowLuxuryPerfumePopup(false)}
+              className="absolute top-1 right-1 text-white hover:text-gray-200"
+            >
+              ×
+            </button>
+            <div className="text-center">
+              <Image
+                src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                alt="Luxury Perfume"
+                width={80}
+                height={80}
+                className="mx-auto mb-2 rounded-lg"
+              />
+              <h4 className="font-bold text-lg mb-2 text-white">70% OFF</h4>
+              <p className="text-sm mb-2 text-gray-300">Luxury Perfume</p>
+              <Link
+                href="/product/luxury-perfume"
+                className="inline-block bg-gradient-to-r from-[#b38b2f] to-[#f7d47b] text-black px-4 py-1.5 rounded-lg text-sm font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+              >
+                Shop Now
+              </Link>
+            </div>
+  </div>
+)}
+
+{/* Subscribe Popup */}
+{showSubscribePopup && (
+  <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div className="relative bg-gradient-to-br from-[#0a0a0a] via-[#1a1a1a] to-[#0f0f0f] p-6 rounded-2xl max-w-sm w-full mx-4 border border-[#b38b2f] shadow-[0_0_25px_rgba(179,139,47,0.4)]">
+      <button
+        onClick={() => setShowSubscribePopup(false)}
+        className="absolute top-2 right-2 p-1 text-gray-400 hover:text-[#f7d47b] hover:bg-[#1f1f1f] rounded-full transition-all"
+      >
+        <X className="w-5 h-5" />
+      </button>
+
+      <div className="text-center">
+        <Image
+          src="https://i.pinimg.com/736x/df/de/1b/dfde1bc6e80d8e39a4c4ab41dd47c49c.jpg"
+          alt="Subscribe"
+          width={300}
+          height={300}
+          className="rounded-xl mb-4 mx-auto border border-[#b38b2f] shadow-[0_0_15px_rgba(247,212,123,0.3)]"
+        />
+        <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#b38b2f] to-[#f7d47b] bg-clip-text text-transparent">
+          Subscribe for Elite Access
+        </h3>
+        <p className="text-gray-400 mb-4">
+          Unlock exclusive deals, early access & luxury updates delivered to your inbox.
+        </p>
+
+        <div className="flex">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 px-3 py-2 bg-[#0f0f0f] border border-[#b38b2f]/40 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#b38b2f]"
+          />
+          <button className="bg-gradient-to-r from-[#b38b2f] to-[#f7d47b] text-black font-semibold px-4 py-2 rounded-r-lg hover:scale-105 transition-transform duration-300">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
       {/* Sticky Bottom Nav for Mobile */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
         <div className="flex justify-around py-2">
@@ -503,12 +587,13 @@ export default function Newest() {
             <Heart className="w-6 h-6" />
             <span className="text-xs">Wishlist</span>
           </Link>
-          <Link href="/profile" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <User className="w-6 h-6" />
-            <span className="text-xs">Profile</span>
-          </Link>
-        </div>
+        <Link href="/profile" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+          <User className="w-6 h-6" />
+          <span className="text-xs">Profile</span>
+        </Link>
       </div>
     </div>
+  </div>
+  </div>
   );
 }
