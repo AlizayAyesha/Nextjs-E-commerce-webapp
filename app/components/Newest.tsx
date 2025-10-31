@@ -320,12 +320,12 @@ export default function Newest() {
                 slug: "bentley-continental-gt",
               },
             ].map((vid, index) => (
-              <div key={index} className="px-4 sm:px-6">
+              <div key={index} className="px-12 sm:px-16">
                 <Link href={`/product/${vid.slug}`}>
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-[250px] p-4 sm:w-[90%] sm:p-0 md:w-[80%] mx-auto">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-[85%] sm:w-[90%] md:w-[80%] mx-auto">
                     <video
                       src={vid.url}
-                      className="w-full h-[300px] object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                      className="w-full h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
                       autoPlay
                       muted
                       loop
