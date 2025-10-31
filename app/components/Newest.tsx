@@ -149,9 +149,9 @@ export default function Newest() {
         </div>
 
         {products && products.length > 0 ? (
-          <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
             {products.map((product: Product) => (
-              <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative">
+              <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-[90%] sm:w-[95%] mx-auto">
                 <div className="absolute top-4 right-4 z-10 flex gap-2">
                   <button
                     onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
@@ -285,12 +285,14 @@ export default function Newest() {
             slidesToShow={3}
             slidesToScroll={1}
             autoplay={true}
-            autoplaySpeed={4500}
+            autoplaySpeed={3000}
             cssEase="ease-in-out"
             arrows={false}
+            centerMode={true}
+            centerPadding="10px"
             responsive={[
-              { breakpoint: 1024, settings: { slidesToShow: 2 } },
-              { breakpoint: 640, settings: { slidesToShow: 1 } },
+              { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: true, centerPadding: '15px' } },
+              { breakpoint: 640, settings: { slidesToShow: 1, centerMode: true, centerPadding: '20px' } },
             ]}
           >
             {[
@@ -320,9 +322,9 @@ export default function Newest() {
                 slug: "bentley-continental-gt",
               },
             ].map((vid, index) => (
-              <div key={index} className="px-12 sm:px-16">
+              <div key={index} className="px-4">
                 <Link href={`/product/${vid.slug}`}>
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-[338px] sm:w-[90%] md:w-[80%] mx-auto">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
                     <video
                       src={vid.url}
                       className="w-full h-[580px] sm:h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
@@ -355,9 +357,9 @@ export default function Newest() {
               </Link>
             </div>
 
-            <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+            <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
               {topPicks.map((product: Product) => (
-                <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 relative">
+                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-[90%] sm:w-[95%] mx-auto">
                   <div className="absolute top-4 right-4 z-10 flex gap-2">
                     <button
                       onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
@@ -420,9 +422,9 @@ export default function Newest() {
         {recentlyViewed.length > 0 && (
           <div className="mt-16">
             <h3 className="text-2xl font-bold text-gray-900 mb-8">Recently Viewed</h3>
-            <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+            <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
               {recentlyViewed.map((product: Product) => (
-                <div key={product._id} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 w-[90%] sm:w-[95%] mx-auto">
                   <div className="relative overflow-hidden">
                     <Image
                       src={product.imageUrl ?? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
@@ -531,8 +533,8 @@ export default function Newest() {
                 Shop Now
               </Link>
             </div>
-  </div>
-)}
+          </div>
+        )}
 
 {/* Subscribe Popup */}
 {showSubscribePopup && (
@@ -574,28 +576,30 @@ export default function Newest() {
     </div>
   </div>
 )}
-      {/* Sticky Bottom Nav for Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
-        <div className="flex justify-around py-2">
-          <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <Home className="w-6 h-6" />
-            <span className="text-xs">Home</span>
-          </Link>
-          <Link href="/product" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <ShoppingCart className="w-6 h-6" />
-            <span className="text-xs">Shop</span>
-          </Link>
-          <Link href="/wishlist" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <Heart className="w-6 h-6" />
-            <span className="text-xs">Wishlist</span>
-          </Link>
+
+    </div>
+
+    {/* Sticky Bottom Nav for Mobile */}
+    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
+      <div className="flex justify-around py-2">
+        <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+          <Home className="w-6 h-6" />
+          <span className="text-xs">Home</span>
+        </Link>
+        <Link href="/product" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+          <ShoppingCart className="w-6 h-6" />
+          <span className="text-xs">Shop</span>
+        </Link>
+        <Link href="/wishlist" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
+          <Heart className="w-6 h-6" />
+          <span className="text-xs">Wishlist</span>
+        </Link>
         <Link href="/profile" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
           <User className="w-6 h-6" />
           <span className="text-xs">Profile</span>
         </Link>
       </div>
     </div>
-  </div>
   </div>
   );
 }
