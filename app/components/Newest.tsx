@@ -325,7 +325,7 @@ export default function Newest() {
                   <div className="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer">
                     <video
                       src={vid.url}
-                      className="w-full h-72 object-cover rounded-2xl group-hover:scale-110 transition-transform duration-[2000ms] ease-in-out"
+                      className="w-full aspect-square object-cover rounded-2xl group-hover:scale-110 transition-transform duration-[2000ms] ease-in-out"
                       autoPlay
                       muted
                       loop

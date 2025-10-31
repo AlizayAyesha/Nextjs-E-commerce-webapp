@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../../lib/imageUrl";
-import Header from "../components/Header";
 import Script from "next/script";
 
 
