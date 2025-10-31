@@ -38,8 +38,6 @@ const ShipmentForm = () => {
       {/* Modal and overlay */}
       <div className="overlay" data-overlay></div>
 
-      <Header onContinueShopping={() => {}} />
-
       <main>
         <div className="container mx-auto px-4 py-8">
           <div className="payment-page">
