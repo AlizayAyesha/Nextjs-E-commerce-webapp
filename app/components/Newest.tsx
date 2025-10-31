@@ -322,10 +322,10 @@ export default function Newest() {
             ].map((vid, index) => (
               <div key={index} className="px-12 sm:px-16">
                 <Link href={`/product/${vid.slug}`}>
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-[85%] sm:w-[90%] md:w-[80%] mx-auto">
+                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer w-[338px] sm:w-[90%] md:w-[80%] mx-auto">
                     <video
                       src={vid.url}
-                      className="w-full h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                      className="w-full h-[580px] sm:h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
                       autoPlay
                       muted
                       loop
