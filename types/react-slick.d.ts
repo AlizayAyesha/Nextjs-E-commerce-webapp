@@ -34,12 +34,7 @@ declare module 'react-slick' {
     pauseOnFocus?: boolean;
     pauseOnHover?: boolean;
     prevArrow?: JSX.Element;
-    responsive?: [
-      {
-        breakpoint: number;
-        settings: 'unslick' | Settings;
-      }
-    ];
+    responsive?: [{ breakpoint: number; settings: Partial<Settings> | 'unslick'; }, ...{ breakpoint: number; settings: Partial<Settings> | 'unslick'; }[]];
     rows?: number;
     rtl?: boolean;
     slide?: string;
@@ -60,7 +55,7 @@ declare module 'react-slick' {
     waitForAnimate?: boolean;
   }
 
-  export class Slider extends React.Component<Settings, any> {}
+  export class Slider extends React.Component<Settings & { children?: React.ReactNode }, any> {}
 
   export default Slider;
 }
