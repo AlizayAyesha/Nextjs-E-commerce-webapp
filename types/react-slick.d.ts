@@ -34,7 +34,7 @@ declare module 'react-slick' {
     pauseOnFocus?: boolean;
     pauseOnHover?: boolean;
     prevArrow?: JSX.Element;
-    responsive?: [{ breakpoint: number; settings: Partial<Settings> | 'unslick'; }, ...{ breakpoint: number; settings: Partial<Settings> | 'unslick'; }[]];
+    responsive?: { breakpoint: number; settings: Partial<Settings> | 'unslick'; }[];
     rows?: number;
     rtl?: boolean;
     slide?: string;
