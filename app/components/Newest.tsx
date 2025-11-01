@@ -25,7 +25,6 @@ interface Product {
 export default function Newest() {
   const [products, setProducts] = useState<Product[]>([]);
   const [topPicks, setTopPicks] = useState<Product[]>([]);
-  const [youMayAlsoLike, setYouMayAlsoLike] = useState<Product[]>([]);
   const [recentlyViewed, setRecentlyViewed] = useState<Product[]>([]);
   const [stockAlerts, setStockAlerts] = useState<{ [key: string]: boolean }>({});
   const [showSpinGame, setShowSpinGame] = useState(false);
@@ -68,25 +67,11 @@ export default function Newest() {
     }
   }, []);
 
-  useEffect(() => {
-    // Generate "You may also like" based on category and price range
-    const currentCategory = 'Men';
-    const avgPrice = products.reduce((sum, p) => sum + p.price, 0) / products.length;
-    const filtered = productsData
-      .filter((p) => {
-        const price = typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price;
-        return p.categoryName === currentCategory || Math.abs(price - avgPrice) < 50;
-      })
-      .filter((p) => !products.some(prod => prod._id === p._id))
-      .slice(0, 4)
-      .map((p) => ({
-        ...p,
-        price: typeof p.price === 'string' ? parseFloat(p.price.replace('$', '')) : p.price,
-      }));
-    setYouMayAlsoLike(filtered);
-  }, [products]);
+
 
   useEffect(() => {
+    let interval = 0;
+
     // Show luxury perfume popup after 3 seconds
     const timer1 = setTimeout(() => {
       setShowLuxuryPerfumePopup(true);
@@ -95,7 +80,7 @@ export default function Newest() {
     // Show subscribe popup after 10 seconds and then every 30 seconds
     const timer2 = setTimeout(() => {
       setShowSubscribePopup(true);
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         setShowSubscribePopup(true);
       }, 30000); // Every 30 seconds
     }, 10000);
@@ -103,6 +88,7 @@ export default function Newest() {
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
+      if (interval) clearInterval(interval);
     };
   }, []);
 
@@ -266,84 +252,136 @@ export default function Newest() {
           </Slider>
         </div>
 
-        {/* You May Also Like — Videos Carousel */}
-        <div className="mt-20">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-3xl font-extrabold text-gray-900">
-              You May Also Like — Watch & Discover
-            </h3>
-            <Link href='/luxury' className='text-indigo-600 hover:text-indigo-800 flex items-center gap-x-2 font-semibold transition-colors duration-200'>
-              More
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </div>
+       {/* You May Also Like — Videos Carousel */}
+<div className="mt-20">
+  <div className="flex justify-between items-center mb-8">
+    <h3 className="text-3xl font-extrabold text-gray-900">
+      You May Also Like — Watch & Discover
+    </h3>
+    <Link href='/luxury' className='text-indigo-600 hover:text-indigo-800 flex items-center gap-x-2 font-semibold transition-colors duration-200'>
+      More
+      <ArrowRight className="w-5 h-5" />
+    </Link>
+  </div>
 
-          <Slider
-            dots={true}
-            infinite={true}
-            speed={700}
-            slidesToShow={3}
-            slidesToScroll={1}
-            autoplay={true}
-            autoplaySpeed={3000}
-            cssEase="ease-in-out"
-            arrows={false}
-            centerMode={true}
-            centerPadding="10px"
-            responsive={[
-              { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: true, centerPadding: '15px' } },
-              { breakpoint: 640, settings: { slidesToShow: 1, centerMode: true, centerPadding: '20px' } },
-            ]}
-          >
-            {[
-              {
-                url: "https://v1.pinimg.com/videos/mc/720p/4e/5c/d6/4e5cd6844136d8b5d11300d60c0c0619.mp4",
-                title: "ASTON MARTIN DB12",
-                slug: "aston-martin-db12",
-              },
-              {
-                url: "https://v1.pinimg.com/videos/mc/720p/8d/b5/d7/8db5d723f96cc05bb4e8e7678d2b5fc1.mp4",
-                title: "Mclaren 570S",
-                slug: "mclaren-570s",
-              },
-              {
-                url: "https://v1.pinimg.com/videos/mc/720p/d5/b9/50/d5b950936ff5da14a995da5d052765fa.mp4",
-                title: "Ferrari F8 Spider",
-                slug: "ferrari-f8-spider",
-              },
-               {
-                url: "https://v1.pinimg.com/videos/mc/720p/36/45/bd/3645bd16d43723c3c48edd8407bf1ec3.mp4",
-                title: "ROLLS-ROYCE PHANTOM SERIES II",
-                slug: "rolls-royce-phantom-series-ii",
-              },
-              {
-                url: "https://v1.pinimg.com/videos/mc/720p/2c/dd/6c/2cdd6c6be47755dba680ea8ab88c4c81.mp4",
-                title: "BENTLEY CONTINENTAL GT",
-                slug: "bentley-continental-gt",
-              },
-            ].map((vid, index) => (
-              <div key={index} className="px-4">
-                <Link href={`/product/${vid.slug}`}>
-                  <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer">
-                    <video
-                      src={vid.url}
-                      className="w-full h-[580px] sm:h-56 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-start p-4">
-                      <h4 className="text-lg font-semibold text-white drop-shadow-md">
-                        {vid.title}
-                      </h4>
-                    </div>
-                  </div>
-                </Link>
+  <div className="carousel-container px-4">
+    <Slider
+      dots={true}
+      infinite={true}
+      speed={500}
+      slidesToShow={3}
+      slidesToScroll={1}
+      autoplay={true}
+      autoplaySpeed={4000}
+      cssEase="ease-in-out"
+      arrows={true}
+      centerMode={true}
+      centerPadding="60px"
+      responsive={[
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '40px',
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '80px',
+            arrows: false,
+          }
+        },
+        {
+          breakpoint: 640,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '60px',
+            arrows: false,
+            dots: true,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '40px',
+            arrows: false,
+            dots: true,
+          }
+        },
+        {
+          breakpoint: 375,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '30px',
+            arrows: false,
+            dots: true,
+          }
+        }
+      ]}
+    >
+      {[
+        {
+          url: "https://v1.pinimg.com/videos/mc/720p/4e/5c/d6/4e5cd6844136d8b5d11300d60c0c0619.mp4",
+          title: "ASTON MARTIN DB12",
+          slug: "aston-martin-db12",
+        },
+        {
+          url: "https://v1.pinimg.com/videos/mc/720p/8d/b5/d7/8db5d723f96cc05bb4e8e7678d2b5fc1.mp4",
+          title: "Mclaren 570S",
+          slug: "mclaren-570s",
+        },
+        {
+          url: "https://v1.pinimg.com/videos/mc/720p/d5/b9/50/d5b950936ff5da14a995da5d052765fa.mp4",
+          title: "Ferrari F8 Spider",
+          slug: "ferrari-f8-spider",
+        },
+        {
+          url: "https://v1.pinimg.com/videos/mc/720p/36/45/bd/3645bd16d43723c3c48edd8407bf1ec3.mp4",
+          title: "ROLLS-ROYCE PHANTOM SERIES II",
+          slug: "rolls-royce-phantom-series-ii",
+        },
+        {
+          url: "https://v1.pinimg.com/videos/mc/720p/2c/dd/6c/2cdd6c6be47755dba680ea8ab88c4c81.mp4",
+          title: "BENTLEY CONTINENTAL GT",
+          slug: "bentley-continental-gt",
+        },
+      ].map((vid, index) => (
+        <div key={index} className="px-2">
+          <Link href={`/product/${vid.slug}`}>
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl group cursor-pointer bg-gray-100 mx-auto max-w-sm">
+              <video
+                src={vid.url}
+                className="w-full h-64 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-start p-4">
+                <h4 className="text-lg font-semibold text-white drop-shadow-md">
+                  {vid.title}
+                </h4>
               </div>
-            ))}
-          </Slider>
+            </div>
+          </Link>
         </div>
+      ))}
+    </Slider>
+  </div>
+</div>
 
         {/* Top Picks */}
         {topPicks && topPicks.length > 0 && (
