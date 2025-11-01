@@ -2,9 +2,6 @@ import productsData from '../components/query-result.json';
 import { ArrowRight, Heart, Bell } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCurrency } from '../context/CurrencyContext';
-
-interface LuxuryPageProps {}
 
 export default function LuxuryPage() {
   const luxuryProducts = productsData

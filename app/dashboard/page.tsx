@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useShoppingCart } from 'use-shopping-cart';
 import { useWishlist } from '../context/WishlistContext';
-import { useCompare } from '../context/CompareContext';
+
 import {
   User,
   ShoppingBag,
@@ -21,7 +21,7 @@ import {
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('overview');
-  const [userStats, setUserStats] = useState({
+  const [userStats] = useState({
     totalOrders: 12,
     wishlistItems: 8,
     totalSpent: 1250,
@@ -30,7 +30,7 @@ export default function Dashboard() {
 
   const { cartCount } = useShoppingCart();
   const { wishlistCount } = useWishlist();
-  const { compareCount } = useCompare();
+  // const { compareCount } = useCompare();
 
   const [profile, setProfile] = useState({
     firstName: 'John',
@@ -384,7 +384,7 @@ export default function Dashboard() {
                           <div className="order-item flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div className="w-16 h-16 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
                             <div className="item-details flex-1">
-                              <h4 className="font-semibold text-gray-900 dark:text-white">Men's Winter Jacket</h4>
+                              <h4 className="font-semibold text-gray-900 dark:text-white">Men&apos;s Winter Jacket</h4>
                               <p className="text-gray-600 dark:text-gray-400">Qty: 1</p>
                               <p className="text-gray-600 dark:text-gray-400">$89.99</p>
                             </div>

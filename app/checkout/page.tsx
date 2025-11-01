@@ -1,35 +1,33 @@
 "use client";
 
-import { useState } from 'react';
+
 import { useShoppingCart } from "use-shopping-cart";
 import { urlFor } from "../../lib/imageUrl";
 import Script from "next/script";
+import Image from "next/image";
+
+type SanityImageSource = {
+  _type: 'image';
+  asset: {
+    _type: 'reference';
+    _ref: string;
+  };
+};
+
+
 
 
 
 const ShipmentForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    email: '',
-    phone: ''
-  });
+
 
   const { cartDetails } = useShoppingCart();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Shipment details submitted:", formData);
+    console.log("Shipment details submitted");
   };
 
   return (
@@ -49,13 +47,15 @@ const ShipmentForm = () => {
                   {Object.values(cartDetails || {}).map((item) => (
                     <li key={item.name} className="flex items-center bg-white p-4 rounded-lg shadow-md">
                       {item.image ? (
-                        <img
+                        <Image
                           src={
                             typeof item.image === 'string'
                               ? item.image
-                              : urlFor(item.image as any)
+                              : urlFor(item.image as unknown as SanityImageSource)
                           }
                           alt={item.name}
+                          width={80}
+                          height={80}
                           className="h-20 w-20 object-cover mr-4"
                         />
                       ) : (

@@ -2,15 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, Heart, ShoppingBag, BarChart3, User } from "lucide-react";
+import { Search, Heart, BarChart3, User } from "lucide-react";
 import ShoppingCart from "./ShoppingCart";
 import { useShoppingCart } from "use-shopping-cart";
 import { useCompare } from "../context/CompareContext";
 import { useWishlist } from "../context/WishlistContext";
+import productsData from './query-result.json';
 
 interface HeaderProps {
   onContinueShopping: () => void;
 }
+
+type ProductData = {
+  _id: string;
+  categoryName: string;
+  description: string;
+  imageUrl: string;
+  name: string;
+  price: number | string;
+  slug: string;
+};
 
 type SearchResult =
   | { type: 'category'; name: string; url: string }
@@ -28,17 +39,15 @@ export default function Header({ onContinueShopping }: HeaderProps) {
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.length > 1) {
-      // Import productsData from the JSON file
-      const productsData = require('./query-result.json');
-      const categories = [...new Set(productsData.map((p: any) => p.categoryName))] as string[];
+      const categories = [...new Set(productsData.map((p: ProductData) => p.categoryName))] as string[];
       const categoryResults = categories.filter((cat: string) =>
         cat.toLowerCase().includes(query.toLowerCase())
       ).map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
 
-      const productResults = productsData.filter((product: any) =>
+      const productResults = productsData.filter((product: ProductData) =>
         product.name.toLowerCase().includes(query.toLowerCase()) ||
         product.slug.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 3).map((product: any) => ({ type: 'product', ...product } as const)); // Limit to 3 products
+      ).slice(0, 3).map((product: ProductData) => ({ type: 'product', ...product } as const)); // Limit to 3 products
 
       setSearchResults([...categoryResults, ...productResults].slice(0, 5)); // Combine and limit to 5
     } else {
@@ -50,8 +59,7 @@ export default function Header({ onContinueShopping }: HeaderProps) {
   const handleFocus = () => {
     setIsFocused(true);
     if (searchResults.length === 0) {
-      const productsData = require('./query-result.json');
-      const categories = [...new Set(productsData.map((p: any) => p.categoryName))] as string[];
+      const categories = [...new Set(productsData.map((p: ProductData) => p.categoryName))] as string[];
       const categoryResults = categories.map((cat: string) => ({ type: 'category', name: cat, url: `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
       setSearchResults(categoryResults.slice(0, 5)); // Show top 5 categories
     }

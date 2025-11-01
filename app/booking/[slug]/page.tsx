@@ -180,7 +180,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
               </div>
 
               <div className='mt-8 p-4 bg-blue-50 rounded-lg'>
-                <h4 className='font-semibold text-blue-800 mb-2'>What's Included:</h4>
+                <h4 className='font-semibold text-blue-800 mb-2'>What&apos;s Included:</h4>
                 <ul className='text-sm text-blue-700 space-y-1'>
                   <li>• Premium experience with expert guides</li>
                   <li>• All necessary equipment and safety gear</li>
@@ -191,7 +191,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
                 </ul>
               </div>
 
-              <p className='mt-8 text-base text-gray-500 tracking-wide'>{data.description}</p>
+              <p className='mt-8 text-base text-gray-500 tracking-wide'>{data.description || "No description available."}</p>
             </div>
           </div>
         </div>

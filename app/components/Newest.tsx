@@ -70,7 +70,7 @@ export default function Newest() {
 
 
   useEffect(() => {
-    let interval = 0;
+    let interval: NodeJS.Timeout | null = null;
 
     // Show luxury perfume popup after 3 seconds
     const timer1 = setTimeout(() => {
@@ -123,7 +123,8 @@ export default function Newest() {
 
 
   return (
-    <div className="bg-white py-16">
+    <>
+      <div className="bg-white py-16">
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center mb-12'>
           <h2 className='text-4xl font-extrabold tracking-tight text-red-600'>Hot Sale</h2>
@@ -615,6 +616,7 @@ export default function Newest() {
   </div>
 )}
 
+      </div>
     </div>
 
     {/* Sticky Bottom Nav for Mobile */}
@@ -637,6 +639,7 @@ export default function Newest() {
           <span className="text-xs">Profile</span>
         </Link>
       </div>
-    </div></div>
+    </div>
+  </>
   );
-  }
+}

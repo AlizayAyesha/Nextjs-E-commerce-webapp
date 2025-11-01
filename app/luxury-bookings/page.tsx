@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import productsData from '../components/query-result.json';
 import ProductCard from '../../components/ui/ProductCard';
-import LuxuryBookings from "../components/LuxuryBookings";
 
 interface Product {
   _id: string;

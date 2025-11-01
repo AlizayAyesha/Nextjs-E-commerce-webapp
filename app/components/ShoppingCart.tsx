@@ -12,19 +12,7 @@ import { useShoppingCart } from "use-shopping-cart"; // Just import useShoppingC
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-// Define your own Product type
-interface ProductAttributes {
-  name: string;
-  price: number;
-  image: string;
-  description?: string;
-  currency: string; // Add currency here
-  // Add any other attributes required for your products
-}
 
-interface Product extends ProductAttributes {
-  sku: string; // This is required by use-shopping-cart
-}
 
 interface ShoppingCartProps {
   onContinueShopping: () => void; 
@@ -37,8 +25,6 @@ export default function ShoppingCart({ onContinueShopping }: ShoppingCartProps) 
     cartDetails,
     shouldDisplayCart,
     removeItem,
-    incrementItem,
-    addItem,
   } = useShoppingCart();
 
   const calculateTotalPrice = () => {
@@ -57,15 +43,7 @@ export default function ShoppingCart({ onContinueShopping }: ShoppingCartProps) 
   const shippingCost = 5.00; 
   const grandTotal = totalPrice + shippingCost;
 
-  const handleAddToCart = (product: Product) => {
-    const existingProduct = Object.values(cartDetails ?? {}).find((item) => item.name === product.name);
 
-    if (existingProduct) {
-      incrementItem(existingProduct.id);
-    } else {
-      addItem(product);
-    }
-  };
 
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => {}}> {/* Provide a toggle function if necessary */}
