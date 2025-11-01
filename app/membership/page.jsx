@@ -5,9 +5,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import Image from "next/image";
 import productsData from "../components/query-result.json";
 import ProductCard from "../../components/ui/ProductCard";
-import LuxuryBookings from "../components/LuxuryBookings";
 
 
 
@@ -45,69 +45,7 @@ export default function MembershipPage() {
     },
   ];
 
-  // Additional memberships
-  const otherMemberships = [
-    {
-      title: "Cruise",
-      image: "https://v1.pinimg.com/videos/mc/720p/7f/3a/e5/7f3ae52c4d8ea53ca1f09881db55fca0.mp4",
-      description: "Luxury cruise ship membership",
-    },
-    {
-      title: "Ski",
-      image: "https://v1.pinimg.com/videos/mc/720p/90/bf/41/90bf4119c7db4a80ecabdb88178413a0.mp4",
-      description: "Skiing mountain club",
-    },
-    {
-      title: "Trophy Hunting Club",
-      image: "https://i.pinimg.com/736x/59/6f/70/596f70ac9a4dcf35afc27b188800aa4d.jpg",
-      description: "Trophy hunting club",
-    },
-    {
-      title: "Elite Jetski Club",
-      image: "/videos/jetskieclub.mp4",
-      description: "Elite Jetski club",
-    },
-    {
-      title: "Elite Hiking Club",
-      image: "https://i.pinimg.com/736x/54/fd/33/54fd33354ec15965d6fb4c7488308e02.jpg",
-      description: "Hikers on a trail",
-    },
-    {
-      title: "Elite Camping Club",
-      image: "https://v1.pinimg.com/videos/mc/720p/65/90/25/659025823fd98f6409ff007b17f9d966.mp4",
-      description: "Night campsite with tents",
-    },
-    {
-      title: "Winter Resorts Membership",
-      image: "/videos/lux resort winter.mp4",
-      description: "Winter resorts membership",
-    },
-    {
-      title: "Luxury Resorts Club",
-      image: "/videos/lux resorts.mp4",
-      description: "Luxury resorts club",
-    },
-    {
-      title: "Private Jet",
-      image: "/videos/jet.mp4",
-      description: "Fly Beyond Limits ✈️",
-    },
-    {
-      title: "Luxury Yacht",
-      image: "/videos/yatch.mp4",
-      description: "Sail in Style ⛵",
-    },
-    {
-      title: "Helicopter Tour",
-      image: "/videos/helicopter.mp4",
-      description: "Sky High Adventures 🚁",
-    },
-    {
-      title: "Charter Plane",
-      image: "/videos/charter plane.mp4",
-      description: "Private charter flights for ultimate luxury travel ✈️",
-    },
-  ];
+
 
   // Carousel settings
   const settings = {
@@ -174,12 +112,11 @@ export default function MembershipPage() {
                       playsInline
                     />
                   ) : (
-                    <img
+                    <Image
+                      fill
                       src={item.image}
                       alt={item.title}
                       style={{
-                        width: "100%",
-                        height: "100%",
                         objectFit: "cover",
                         filter: "brightness(75%)",
                       }}

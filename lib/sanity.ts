@@ -1,6 +1,5 @@
 import { createClient } from 'next-sanity';
-import imageUrlBuilder from '@sanity/image-url';
-// Removed ImageSource import
+import imageUrlBuilder, { ImageSource } from '@sanity/image-url';
 
 // Create a Sanity client
 export const client = createClient({
@@ -14,6 +13,6 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 
 // Function to get the image URL from the source
-export function urlFor(source: any) { // Use 'any' temporarily
+export function urlFor(source: ImageSource) {
     return builder.image(source); // Return the image URL using the builder
 }

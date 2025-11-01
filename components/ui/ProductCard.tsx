@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCurrency } from '../../app/context/CurrencyContext';
 import { useCompare } from '../../app/context/CompareContext';
 import { useWishlist } from '../../app/context/WishlistContext';
@@ -62,7 +63,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const isVideo = product.imageUrl && (product.imageUrl.includes('video') || product.imageUrl.endsWith('.mp4'));
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
       {isVideo ? (
         <video
           src={product.imageUrl}
@@ -74,10 +75,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           onError={() => setVideoError(true)}
         />
       ) : (
-        <img
+        <Image
+          fill
           src={product.imageUrl}
           alt={product.name}
-          className="w-full h-80 object-cover"
+          className="object-cover"
           onError={() => setImageError(true)}
         />
       )}

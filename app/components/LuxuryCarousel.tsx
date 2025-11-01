@@ -45,7 +45,7 @@ export default function LuxuryCarousel() {
     <div className="bg-gray-900 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-extrabold text-center text-white mb-12">
-          Elite Memmbershiph Clubs
+          Elite Membership Clubs
         </h2>
 
         <Slider {...settings}>

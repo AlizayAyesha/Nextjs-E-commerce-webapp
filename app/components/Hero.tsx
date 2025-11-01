@@ -1,7 +1,7 @@
 // components/Hero.tsx
 "use client";
 
-import { Button } from "@/components/ui/button"; // Check if this path is correct
+import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import Link from 'next/link';
 

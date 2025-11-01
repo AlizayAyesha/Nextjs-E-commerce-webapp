@@ -46,14 +46,60 @@ const Blog = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
     cssEase: "ease-in-out",
     arrows: false,
     centerMode: true,
-    centerPadding: "10px",
+    centerPadding: "40px",
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2, centerMode: true, centerPadding: '15px' } },
-      { breakpoint: 640, settings: { slidesToShow: 1, centerMode: true, centerPadding: '20px' } },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerMode: true,
+          centerPadding: '30px'
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '80px',
+          dots: true,
+          autoplaySpeed: 3500,
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '60px',
+          dots: true,
+          autoplaySpeed: 3500,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '40px',
+          dots: true,
+          autoplaySpeed: 3500,
+        }
+      },
+      {
+        breakpoint: 375,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: '30px',
+          dots: true,
+          autoplaySpeed: 3500,
+        }
+      },
     ],
   };
 
@@ -62,7 +108,7 @@ const Blog = () => {
       {/* ✨ Golden Glitter Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(245,215,142,0.25)_1px,transparent_1px)] bg-[length:40px_40px] animate-glitter pointer-events-none"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-wide bg-gradient-to-r from-[#c9a646] to-[#f5d78e] bg-clip-text text-transparent mb-4">
@@ -74,48 +120,51 @@ const Blog = () => {
         </div>
 
         {/* Carousel */}
-        <Slider {...settings}>
-          {blogPosts.map((post, index) => (
-            <div key={index} className="px-4">
-              <div className="bg-white border border-[#f5d78e80] rounded-3xl shadow-[0_8px_25px_rgba(245,215,142,0.2)] hover:shadow-[0_12px_35px_rgba(245,215,142,0.35)] transition-all duration-300">
-                <Link href="#">
-                  <div className="relative w-full h-64 overflow-hidden rounded-t-3xl">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover transform transition-transform duration-500 hover:scale-110"
-                    />
-                  </div>
-                </Link>
-                <div className="p-6">
-                  <span className="inline-block bg-gradient-to-r from-[#f5d78e] to-[#c9a646] text-white text-xs px-4 py-1 rounded-full uppercase tracking-wider mb-3">
-                    {post.category}
-                  </span>
+        <div className="blog-carousel-container">
+          <Slider {...settings}>
+            {blogPosts.map((post, index) => (
+              <div key={index} className="px-2 sm:px-3">
+                <div className="bg-white border border-[#f5d78e80] rounded-3xl shadow-[0_8px_25px_rgba(245,215,142,0.2)] hover:shadow-[0_12px_35px_rgba(245,215,142,0.35)] transition-all duration-300 mx-auto max-w-sm">
                   <Link href="#">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3 leading-snug hover:text-[#c9a646] transition-colors">
-                      {post.title}
-                    </h3>
+                    <div className="relative w-full h-64 overflow-hidden rounded-t-3xl">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover transform transition-transform duration-500 hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
                   </Link>
-                  <p className="text-gray-500 text-sm">
-                    By{" "}
-                    <cite className="font-semibold text-[#c9a646] not-italic">
-                      {post.author}
-                    </cite>{" "}
-                    /{" "}
-                    <time dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
-                  </p>
+                  <div className="p-6">
+                    <span className="inline-block bg-gradient-to-r from-[#f5d78e] to-[#c9a646] text-white text-xs px-4 py-1 rounded-full uppercase tracking-wider mb-3">
+                      {post.category}
+                    </span>
+                    <Link href="#">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-3 leading-snug hover:text-[#c9a646] transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                    </Link>
+                    <p className="text-gray-500 text-sm">
+                      By{" "}
+                      <cite className="font-semibold text-[#c9a646] not-italic">
+                        {post.author}
+                      </cite>{" "}
+                      /{" "}
+                      <time dateTime={post.date}>
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        </div>
       </div>
 
       {/* ✨ Glitter Animation */}
@@ -131,6 +180,30 @@ const Blog = () => {
         .animate-glitter {
           animation: glitter 10s linear infinite;
           opacity: 0.2;
+        }
+
+        /* Custom slick carousel styles for better mobile experience */
+        :global(.slick-slide) {
+          padding: 10px 0;
+        }
+
+        :global(.slick-list) {
+          margin: 0 -10px;
+        }
+
+        :global(.slick-dots) {
+          bottom: -50px;
+        }
+
+        :global(.slick-dots li button:before) {
+          font-size: 10px;
+          color: #c9a646;
+          opacity: 0.5;
+        }
+
+        :global(.slick-dots li.slick-active button:before) {
+          opacity: 1;
+          color: #c9a646;
         }
       `}</style>
     </section>

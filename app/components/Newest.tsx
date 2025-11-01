@@ -637,7 +637,6 @@ export default function Newest() {
           <span className="text-xs">Profile</span>
         </Link>
       </div>
-    </div>
-  </div>
+    </div></div>
   );
-}
+  }
