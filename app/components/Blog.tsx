@@ -119,8 +119,53 @@ const Blog = () => {
           </p>
         </div>
 
-        {/* Carousel */}
-        <div className="blog-carousel-container">
+        {/* Grid for Mobile */}
+        <div className="md:hidden">
+          <div className="grid grid-cols-1 gap-6">
+            {blogPosts.map((post, index) => (
+              <div key={index} className="bg-white border border-[#f5d78e80] rounded-3xl shadow-[0_8px_25px_rgba(245,215,142,0.2)] hover:shadow-[0_12px_35px_rgba(245,215,142,0.35)] transition-all duration-300">
+                <Link href="#">
+                  <div className="relative w-full h-64 overflow-hidden rounded-t-3xl">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transform transition-transform duration-500 hover:scale-110"
+                      sizes="100vw"
+                    />
+                  </div>
+                </Link>
+                <div className="p-6">
+                  <span className="inline-block bg-gradient-to-r from-[#f5d78e] to-[#c9a646] text-white text-xs px-4 py-1 rounded-full uppercase tracking-wider mb-3">
+                    {post.category}
+                  </span>
+                  <Link href="#">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-3 leading-snug hover:text-[#c9a646] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                  </Link>
+                  <p className="text-gray-500 text-sm">
+                    By{" "}
+                    <cite className="font-semibold text-[#c9a646] not-italic">
+                      {post.author}
+                    </cite>{" "}
+                    /{" "}
+                    <time dateTime={post.date}>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </time>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Carousel for Desktop */}
+        <div className="hidden md:block blog-carousel-container">
           <Slider {...settings}>
             {blogPosts.map((post, index) => (
               <div key={index} className="px-2 sm:px-3">

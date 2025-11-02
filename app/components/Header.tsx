@@ -31,6 +31,7 @@ export default function Header({ onContinueShopping }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isFocused, setIsFocused] = useState(false);
+
   const { handleCartClick } = useShoppingCart();
   const { compareCount } = useCompare();
   const { wishlistCount } = useWishlist();
@@ -74,9 +75,9 @@ export default function Header({ onContinueShopping }: HeaderProps) {
     <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
         <div className="flex items-center justify-between py-4">
-          {/* Search Bar and User Icon */}
+          {/* Search Bar, Compare, and User Icon */}
           <div className="flex items-center space-x-4">
-            <div className="flex-1 max-w-lg relative">
+            <div className="flex-1 max-w-xs md:max-w-lg relative">
               <input
                 type="text"
                 placeholder="Search products..."
@@ -104,8 +105,19 @@ export default function Header({ onContinueShopping }: HeaderProps) {
               )}
             </div>
 
+            {/* Compare Link */}
+            <Link href="/compare" className="flex md:hidden items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 relative">
+              <BarChart3 size={20} />
+              <span className="hidden sm:inline">Compare</span>
+              {compareCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {compareCount}
+                </span>
+              )}
+            </Link>
+
             {/* User Dashboard Icon */}
-            <Link href="/dashboard" className="flex items-center justify-center w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <Link href="/profile" className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               <User size={20} />
             </Link>
           </div>
@@ -113,7 +125,7 @@ export default function Header({ onContinueShopping }: HeaderProps) {
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
             {/* Compare Link */}
-            <Link href="/compare" className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 relative">
+            <Link href="/compare" className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 relative">
               <BarChart3 size={20} />
               <span className="hidden sm:inline">Compare</span>
               {compareCount > 0 && (
@@ -124,7 +136,7 @@ export default function Header({ onContinueShopping }: HeaderProps) {
             </Link>
 
             {/* Favorites/Wishlist */}
-            <Link href="/wishlist" className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 relative">
+            <Link href="/wishlist" className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-black dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 transition-all duration-300 relative">
               <Heart size={20} />
               <span className="hidden sm:inline">Favorites</span>
               {wishlistCount > 0 && (
@@ -135,12 +147,16 @@ export default function Header({ onContinueShopping }: HeaderProps) {
             </Link>
 
             {/* Shopping Cart */}
-            <div onClick={handleCartClick}>
+            <div onClick={handleCartClick} className="hidden md:block">
               <ShoppingCart onContinueShopping={onContinueShopping} />
             </div>
+
+
           </div>
         </div>
       </div>
+
+
     </div>
   );
 }

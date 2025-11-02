@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Heart, Bell, Gift, Home, ShoppingCart, User, X } from 'lucide-react';
+import { ArrowRight, Heart, Bell, Gift, X, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import productsData from './query-result.json';
 import { useCurrency } from '../context/CurrencyContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useShoppingCart } from 'use-shopping-cart';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -138,7 +139,7 @@ export default function Newest() {
         {products && products.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
             {products.map((product: Product) => (
-              <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-[90%] sm:w-[95%] mx-auto">
+              <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative">
                 <div className="absolute top-4 right-4 z-10 flex gap-2">
                   <button
                     onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
@@ -199,9 +200,14 @@ export default function Newest() {
 
         {/* Luxurious Bookings Carousel */}
         <div className="mt-20">
-          <h3 className="text-4xl font-extrabold text-gray-900 mb-10 flex items-center gap-3">
-            <span className="text-yellow-400">★</span> Luxury Sale
-          </h3>
+          <div className="flex justify-between items-center mb-10">
+            <h3 className="text-4xl font-extrabold text-gray-900 flex items-center gap-3">
+              <span className="text-yellow-400">★</span> Luxury Sale
+            </h3>
+            <Link href='/luxury' className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 md:hidden'>
+              View More
+            </Link>
+          </div>
 
           <Slider
             dots={true}
@@ -254,7 +260,7 @@ export default function Newest() {
         </div>
 
        {/* You May Also Like — Videos Carousel */}
-<div className="mt-20">
+<div className="hidden md:block mt-20">
   <div className="flex justify-between items-center mb-8">
     <h3 className="text-3xl font-extrabold text-gray-900">
       You May Also Like — Watch & Discover
@@ -398,7 +404,7 @@ export default function Newest() {
 
             <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
               {topPicks.map((product: Product) => (
-                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-[90%] sm:w-[95%] mx-auto">
+                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 relative">
                   <div className="absolute top-4 right-4 z-10 flex gap-2">
                     <button
                       onClick={() => isInWishlist(product._id) ? removeFromWishlistContext(product._id) : addToWishlistContext({
@@ -463,7 +469,7 @@ export default function Newest() {
             <h3 className="text-2xl font-bold text-gray-900 mb-8">Recently Viewed</h3>
             <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-0'>
               {recentlyViewed.map((product: Product) => (
-                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 w-[90%] sm:w-[95%] mx-auto">
+                <div key={product._id} className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className="relative overflow-hidden">
                     <Image
                       src={product.imageUrl ?? 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPHN2Zz4='}
@@ -619,27 +625,7 @@ export default function Newest() {
       </div>
     </div>
 
-    {/* Sticky Bottom Nav for Mobile */}
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-40">
-      <div className="flex justify-around py-2">
-        <Link href="/" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Home</span>
-        </Link>
-        <Link href="/product" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-          <ShoppingCart className="w-6 h-6" />
-          <span className="text-xs">Shop</span>
-        </Link>
-        <Link href="/wishlist" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-          <Heart className="w-6 h-6" />
-          <span className="text-xs">Wishlist</span>
-        </Link>
-        <Link href="/profile" className="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-          <User className="w-6 h-6" />
-          <span className="text-xs">Profile</span>
-        </Link>
-      </div>
-    </div>
+
   </>
   );
 }

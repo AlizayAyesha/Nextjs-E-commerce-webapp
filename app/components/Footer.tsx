@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Phone,
@@ -125,17 +126,25 @@ const LuxuryFooter = () => {
               title: "Exclusives",
               items: ["Limited Editions", "Collaborations", "Gifting", "Press", "Careers"],
             },
+            {
+              title: "Categories",
+              items: [
+                { name: "Men", url: "/Men" },
+                { name: "Women", url: "/Women" },
+                { name: "Kids", url: "/Kids" },
+              ],
+            },
           ].map((col, i) => (
             <div key={i} className="space-y-4">
               <h2 className="text-lg font-bold text-[#f7d47b]">{col.title}</h2>
               <div className="space-y-2">
                 {col.items.map((item) => (
                   <Link
-                    key={item}
-                    href="#"
+                    key={typeof item === 'string' ? item : item.name}
+                    href={typeof item === 'string' ? "#" : item.url}
                     className="block text-gray-400 hover:text-[#f7d47b] hover:drop-shadow-[0_0_6px_#f7d47b80] transition-all duration-300"
                   >
-                    {item}
+                    {typeof item === 'string' ? item : item.name}
                   </Link>
                 ))}
               </div>
@@ -190,7 +199,7 @@ const LuxuryFooter = () => {
       {/* Bottom */}
       <div className="relative py-8 bg-[#0e0e0e]/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          <img src="https://www.pikpng.com/pngl/b/286-2864817_visa-mastercard-and-american-express-for-international-visa.png" alt="payment methods" className="h-8 opacity-80" />
+          <Image src="https://www.pikpng.com/pngl/b/286-2864817_visa-mastercard-and-american-express-for-international-visa.png" alt="payment methods" width={200} height={32} className="h-8 opacity-80" />
           <p className="text-gray-500 text-sm text-center md:text-right">
             ©{" "}
             <Link href="#" className="text-[#f7d47b] font-semibold hover:text-[#e2b94b] transition-all">

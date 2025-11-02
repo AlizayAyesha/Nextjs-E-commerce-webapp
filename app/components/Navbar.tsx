@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X, User, ShoppingCart, Heart } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -18,15 +18,14 @@ const links = [
   { name: 'Men', url: '/Men' },
   { name: 'Women', url: '/Women' },
   { name: 'Kids', url: '/Kids' },
+  { name: 'Compare', url: '/compare' },
 ];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false); // State to toggle mobile menu
   const pathname = usePathname();
   const { currency, setCurrency } = useCurrency();
   const { theme, toggleTheme } = useTheme();
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="mb-8 border-b bg-black text-white">
@@ -37,16 +36,8 @@ export default function Navbar() {
           </h1>
         </Link>
 
-        {/* Hamburger Menu for mobile */}
-        <button
-          className="block lg:hidden text-white hover:text-green-500 transition-colors duration-300"
-          onClick={toggleMenu}
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden gap-12 lg:flex 2xl:ml-16">
+        {/* Navigation */}
+        <nav className="hidden md:flex gap-12 2xl:ml-16">
           {links.map((link, idx) => (
             <div key={idx}>
               {pathname === link.url ? (
@@ -64,23 +55,6 @@ export default function Navbar() {
             </div>
           ))}
         </nav>
-
-        {/* Mobile Navigation */}
-        {menuOpen && (
-          <nav className="flex flex-col absolute top-16 left-0 w-full bg-white dark:bg-black lg:hidden">
-            {links.map((link, idx) => (
-              <div key={idx} className="border-t border-gray-300 dark:border-gray-700">
-                <Link
-                  className="block py-4 px-6 text-lg font-semibold text-black dark:text-white hover:text-green-500 transition-colors duration-300"
-                  href={link.url}
-                  onClick={toggleMenu} // Close menu on link click
-                >
-                  {link.name}
-                </Link>
-              </div>
-            ))}
-          </nav>
-        )}
 
         <div className="flex items-center space-x-6">
           {/* Theme Toggle */}
@@ -133,8 +107,72 @@ export default function Navbar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white hover:text-green-500 transition-colors duration-300"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-black text-white border-t border-gray-700">
+          <div className="px-4 py-4 space-y-4">
+            {/* Navigation Links */}
+            {links.map((link, idx) => (
+              <div key={idx}>
+                {pathname === link.url ? (
+                  <Link className="block text-lg font-semibold text-green-400" href={link.url}>
+                    {link.name}
+                  </Link>
+                ) : (
+                  <Link
+                    className="block text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300"
+                    href={link.url}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+
+            {/* Additional Mobile Links */}
+            <div className="border-t border-gray-700 pt-4 space-y-4">
+              <Link href="/profile" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                <User size={20} />
+                Dashboard
+              </Link>
+              <Link href="/checkout" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                <ShoppingCart size={20} />
+                Cart
+              </Link>
+              <Link href="/wishlist" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                <Heart size={20} />
+                Wishlist
+              </Link>
+              <Link href="/luxury" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                Luxury
+              </Link>
+              <Link href="/luxury-bookings" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                Luxury Bookings
+              </Link>
+              <Link href="/membership" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                Membership
+              </Link>
+              <Link href="/booking" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                Booking
+              </Link>
+              <Link href="/compare" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
+                Compare
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

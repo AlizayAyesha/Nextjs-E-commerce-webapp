@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image"; 
@@ -62,7 +62,7 @@ export default function SignUp() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-lg flex bg-white shadow-lg rounded-lg">
         {/* Left side with image */}
-        <div className="w-1/2 rounded-l-lg overflow-hidden">
+        <div className="hidden md:block w-1/2 rounded-l-lg overflow-hidden">
           <Image
             src="https://i.pinimg.com/564x/22/68/2c/22682c59bf8a897cb6f7c0ac193cd387.jpg"
             alt="Sign Up"
@@ -73,7 +73,7 @@ export default function SignUp() {
         </div>
 
         {/* Right side with form */}
-        <div className="w-1/2 p-8 space-y-6">
+        <div className="w-full md:w-1/2 p-8 space-y-6">
           <h2 className="text-center text-3xl font-extrabold text-gray-900">
             Sign Up
           </h2>
