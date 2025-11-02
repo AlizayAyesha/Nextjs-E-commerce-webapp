@@ -18,7 +18,6 @@ const links = [
   { name: 'Men', url: '/Men' },
   { name: 'Women', url: '/Women' },
   { name: 'Kids', url: '/Kids' },
-  { name: 'Compare', url: '/compare' },
 ];
 
 export default function Navbar() {
@@ -140,35 +139,6 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Additional Mobile Links */}
-            <div className="border-t border-gray-700 pt-4 space-y-4">
-              <Link href="/profile" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                <User size={20} />
-                Dashboard
-              </Link>
-              <Link href="/checkout" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                <ShoppingCart size={20} />
-                Cart
-              </Link>
-              <Link href="/wishlist" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                <Heart size={20} />
-                Wishlist
-              </Link>
-              <Link href="/luxury" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                Luxury
-              </Link>
-              <Link href="/luxury-bookings" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                Luxury Bookings
-              </Link>
-              <Link href="/membership" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                Membership
-              </Link>
-              <Link href="/booking" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                Booking
-              </Link>
-              <Link href="/compare" className="flex items-center gap-2 text-lg font-semibold text-white hover:text-green-500 transition-colors duration-300">
-                Compare
-              </Link>
             </div>
           </div>
         </div>
@@ -176,3 +146,4 @@ export default function Navbar() {
     </header>
   );
 }
+
