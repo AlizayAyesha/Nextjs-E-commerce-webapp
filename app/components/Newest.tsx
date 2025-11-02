@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Heart, Bell, Gift, X, ShoppingCart } from 'lucide-react';
+import { ArrowRight, Heart, Bell, Gift, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import productsData from './query-result.json';
 import { useCurrency } from '../context/CurrencyContext';
 import { useWishlist } from '../context/WishlistContext';
-import { useShoppingCart } from 'use-shopping-cart';
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
