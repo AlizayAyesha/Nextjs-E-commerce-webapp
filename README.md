@@ -21,7 +21,7 @@ To transform this concept into a full-fledged platform: integrate backend servic
 
 ## 🔗 Live Demo
 
-Experience it live: [https://nextjs-e-commerce-webapp.vercel.app/](https://nextjs-e-commerce-webapp.vercel.app/)
+Experience it live: https://luxury-e-commerce-web-app.vercel.app/
 
 ## 🧠 How You Can Use It
 
