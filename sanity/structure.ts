@@ -1,7 +1,13 @@
-import { StructureBuilder } from 'sanity/desk'; 
+import type {StructureResolver} from 'sanity/desk'
 
-// Define the structure for Sanity Studio
-export const structure: (S: StructureBuilder) => ReturnType<typeof S.list> = (S) => 
+// https://www.sanity.io/docs/structure-builder-cheat-sheet
+export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
-    .items(S.documentTypeListItems());
+    .items([
+      S.documentTypeListItem('product').title('Products'),
+      S.documentTypeListItem('category').title('Categories'),
+      S.documentTypeListItem('user').title('Users'),
+      S.documentTypeListItem('userInteraction').title('User Interactions'),
+      // Add more document types here as needed
+    ])

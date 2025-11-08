@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from "@/components/ui/button"; // Import the Button component
+import React from 'react';
+import { Button } from "@/app/components/ui/button"; // Import the Button component
 import { useShoppingCart } from "use-shopping-cart"; // Import the useShoppingCart hook
 
 // Define the ProductCart interface
@@ -37,7 +38,7 @@ export default function AddToBag({
   const isProductInCart = () => {
     if (!cartDetails) return false; // Check if cartDetails is defined
     return Object.values(cartDetails).some(
-      (item) => item.name === product.name && item.price === product.price // Adjust logic as needed
+      (item: any) => item.name === product.name && item.price === product.price // Adjust logic as needed
     );
   };
 
@@ -45,9 +46,9 @@ export default function AddToBag({
   const getProductQuantity = () => {
     if (!cartDetails) return 0; // Check if cartDetails is defined
     const item = Object.values(cartDetails).find(
-      (item) => item.name === product.name && item.price === product.price
+      (item: any) => item.name === product.name && item.price === product.price
     );
-    return item ? item.quantity : 0;
+    return item ? (item as any).quantity : 0;
   };
 
   const handleAddToBag = () => {
@@ -63,7 +64,10 @@ export default function AddToBag({
   };
 
   return (
-    <Button onClick={handleAddToBag}>
+    <Button
+      onClick={handleAddToBag}
+      className="w-full bg-orange-500 text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+    >
       Add to Bag
     </Button>
   );

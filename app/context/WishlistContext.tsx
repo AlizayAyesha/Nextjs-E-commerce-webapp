@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
 interface Product {
   _id: string;
@@ -40,26 +40,26 @@ interface WishlistProviderProps {
 export const WishlistProvider: React.FC<WishlistProviderProps> = ({ children }) => {
   const [wishlistItems, setWishlistItems] = useState<Product[]>([]);
 
-  const addToWishlist = (product: Product) => {
+  const addToWishlist = useCallback((product: Product) => {
     setWishlistItems((prev) => {
       if (!prev.find((item) => item._id === product._id)) {
         return [...prev, product];
       }
       return prev;
     });
-  };
+  }, []);
 
-  const removeFromWishlist = (productId: string) => {
+  const removeFromWishlist = useCallback((productId: string) => {
     setWishlistItems((prev) => prev.filter((item) => item._id !== productId));
-  };
+  }, []);
 
-  const clearWishlist = () => {
+  const clearWishlist = useCallback(() => {
     setWishlistItems([]);
-  };
+  }, []);
 
-  const isInWishlist = (productId: string) => {
+  const isInWishlist = useCallback((productId: string) => {
     return wishlistItems.some((item) => item._id === productId);
-  };
+  }, [wishlistItems]);
 
   const wishlistCount = wishlistItems.length;
 

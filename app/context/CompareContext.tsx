@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
 interface Product {
   _id: string;
@@ -40,7 +40,7 @@ interface CompareProviderProps {
 export const CompareProvider: React.FC<CompareProviderProps> = ({ children }) => {
   const [compareItems, setCompareItems] = useState<Product[]>([]);
 
-  const addToCompare = (product: Product) => {
+  const addToCompare = useCallback((product: Product) => {
     setCompareItems((prev) => {
       if (prev.length >= 4) {
         // Limit to 4 products for comparison
@@ -51,19 +51,19 @@ export const CompareProvider: React.FC<CompareProviderProps> = ({ children }) =>
       }
       return prev;
     });
-  };
+  }, []);
 
-  const removeFromCompare = (productId: string) => {
+  const removeFromCompare = useCallback((productId: string) => {
     setCompareItems((prev) => prev.filter((item) => item._id !== productId));
-  };
+  }, []);
 
-  const clearCompare = () => {
+  const clearCompare = useCallback(() => {
     setCompareItems([]);
-  };
+  }, []);
 
-  const isInCompare = (productId: string) => {
+  const isInCompare = useCallback((productId: string) => {
     return compareItems.some((item) => item._id === productId);
-  };
+  }, [compareItems]);
 
   const compareCount = compareItems.length;
 

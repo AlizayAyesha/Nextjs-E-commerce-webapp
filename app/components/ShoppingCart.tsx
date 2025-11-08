@@ -6,7 +6,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/app/components/ui/sheet";
 import { ShoppingBag } from "lucide-react";
 import { useShoppingCart } from "use-shopping-cart"; // Just import useShoppingCart
 import Image from 'next/image';

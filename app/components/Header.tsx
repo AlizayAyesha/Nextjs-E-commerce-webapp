@@ -43,7 +43,32 @@ export default function Header({ onContinueShopping }: HeaderProps) {
       const categories = [...new Set(productsData.map((p: ProductData) => p.categoryName))] as string[];
       const categoryResults = categories.filter((cat: string) =>
         cat.toLowerCase().includes(query.toLowerCase())
-      ).map((cat: string) => ({ type: 'category', name: cat, url: cat === 'Luxury' ? '/luxury' : `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
+      ).map((cat: string) => {
+        let url = '';
+        switch (cat) {
+          case 'Men':
+            url = '/Men';
+            break;
+          case 'Women':
+            url = '/Women';
+            break;
+          case 'Kids':
+            url = '/Kids';
+            break;
+          case 'Luxury':
+            url = '/luxury';
+            break;
+          case 'booking':
+            url = '/booking';
+            break;
+          case 'Top picks':
+            url = '/'; // Redirect to home page for Top picks
+            break;
+          default:
+            url = `/${cat.replace(/\s+/g, '').toLowerCase()}`;
+        }
+        return { type: 'category', name: cat, url } as const;
+      });
 
       const productResults = productsData.filter((product: ProductData) =>
         product.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -61,7 +86,32 @@ export default function Header({ onContinueShopping }: HeaderProps) {
     setIsFocused(true);
     if (searchResults.length === 0) {
       const categories = [...new Set(productsData.map((p: ProductData) => p.categoryName))] as string[];
-      const categoryResults = categories.map((cat: string) => ({ type: 'category', name: cat, url: cat === 'Luxury' ? '/luxury' : `/${cat.replace(/\s+/g, '').toLowerCase()}` } as const));
+      const categoryResults = categories.map((cat: string) => {
+        let url = '';
+        switch (cat) {
+          case 'Men':
+            url = '/Men';
+            break;
+          case 'Women':
+            url = '/Women';
+            break;
+          case 'Kids':
+            url = '/Kids';
+            break;
+          case 'Luxury':
+            url = '/luxury';
+            break;
+          case 'booking':
+            url = '/booking';
+            break;
+          case 'Top picks':
+            url = '/'; // Redirect to home page for Top picks
+            break;
+          default:
+            url = `/${cat.replace(/\s+/g, '').toLowerCase()}`;
+        }
+        return { type: 'category', name: cat, url } as const;
+      });
       setSearchResults(categoryResults.slice(0, 5)); // Show top 5 categories
     }
   };

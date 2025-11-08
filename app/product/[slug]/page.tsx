@@ -1,4 +1,6 @@
 import productsData from '../../components/query-result.json';
+import { client } from '../../../lib/sanity';
+import { urlFor } from '../../../lib/imageUrl';
 import { Truck } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import AddToBag from '../../components/AddToBag';
@@ -12,14 +14,62 @@ interface ProductPageProps {
 }
 
 async function getData(slug: string) {
-  const product = productsData.find(p => p.slug === slug);
+  // First try to find in JSON data by slug
+  let product = productsData.find(p => p.slug === slug);
+
   if (product) {
     return {
       ...product,
       price: typeof product.price === 'string' ? parseFloat(product.price.replace('$', '')) : product.price,
-      sku: product._id, // Use _id as sku since JSON doesn't have sku
+      sku: product._id,
+      imageUrl: product.imageUrl,
+      categoryName: product.categoryName,
     };
   }
+
+  // If not found in JSON, try to find by _id (in case slug is actually an ID)
+  product = productsData.find(p => p._id === slug);
+  if (product) {
+    return {
+      ...product,
+      price: typeof product.price === 'string' ? parseFloat(product.price.replace('$', '')) : product.price,
+      sku: product._id,
+      imageUrl: product.imageUrl,
+      categoryName: product.categoryName,
+    };
+  }
+
+  // Try Sanity CMS
+  try {
+    const sanityProducts = await client.fetch(`
+      *[_type == "product" && (slug.current == $slug || _id == $slug)] {
+        _id,
+        name,
+        price,
+        category,
+        image,
+        description,
+        "slug": slug.current
+      }
+    `, { slug });
+
+    if (sanityProducts && sanityProducts.length > 0) {
+      const sanityProduct = sanityProducts[0];
+      return {
+        _id: sanityProduct._id,
+        name: sanityProduct.name,
+        price: typeof sanityProduct.price === 'number' ? sanityProduct.price : parseFloat(sanityProduct.price) || 0,
+        sku: sanityProduct._id,
+        imageUrl: sanityProduct.image ? urlFor(sanityProduct.image) : '/placeholder-image.png',
+        categoryName: sanityProduct.category || 'General',
+        description: sanityProduct.description || 'No description available.',
+        slug: sanityProduct.slug || sanityProduct._id,
+      };
+    }
+  } catch (error) {
+    console.log('Sanity lookup failed:', error);
+  }
+
   return null;
 }
 
@@ -106,26 +156,28 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </span>
               </div>
 
-              <div className='flex gap-2.5'>
+              <div className='flex flex-col sm:flex-row gap-3 sm:gap-4'>
                 {data.categoryName === 'booking' ? (
-                  <Link href={`/booking/${data.slug}`} passHref>
-                    <Button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                  <Link href={`/booking/${data.slug}`} passHref className="w-full sm:w-auto">
+                    <Button className="w-full sm:w-auto bg-green-500 text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
                       Book Now
                     </Button>
                   </Link>
                 ) : (
                   <>
-                    <AddToBag
-                      sku={data.sku} // Pass the sku here
-                      currency='USD'
-                      description={data.description}
-                      image={data.imageUrl}
-                      name={data.name}
-                      price={data.price}
-                      key={data._id}
-                    />
-                    <Link href="/checkout" passHref>
-                      <Button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                    <div className="flex-1">
+                      <AddToBag
+                        sku={data.sku}
+                        currency='USD'
+                        description={data.description}
+                        image={data.imageUrl}
+                        name={data.name}
+                        price={data.price}
+                        key={data._id}
+                      />
+                    </div>
+                    <Link href="/checkout" passHref className="w-full sm:w-auto">
+                      <Button className="w-full sm:w-auto bg-green-500 text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
                         Check Out
                       </Button>
                     </Link>

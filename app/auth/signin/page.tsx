@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function SignUp() {
   const [formData, setFormData] = useState({
     username: '',
@@ -60,6 +61,15 @@ export default function SignUp() {
            
             <button type="submit" className="w-full bg-green-600 text-white py-2">Sign In</button>
           </form>
+
+          <div className="text-center">
+            <Link
+              href="/admin"
+              className="text-xs text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              Admin Dashboard
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -175,6 +175,15 @@ export default function SignUp() {
               Sign In
             </Link>
           </p>
+
+          <div className="text-center">
+            <Link
+              href="/admin"
+              className="text-xs text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              Admin Dashboard
+            </Link>
+          </div>
         </div>
       </div>
     </div>

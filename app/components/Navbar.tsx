@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sun, Moon } from "lucide-react";
@@ -8,7 +9,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu"; // Import dropdown menu components
+} from "./ui/dropdown-menu"; // Import dropdown menu components
 import { useCurrency } from "../context/CurrencyContext";
 import { useTheme } from "../context/ThemeContext";
 

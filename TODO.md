@@ -1,2 +1,0 @@
-- [ ] Remove hamburger menu from mobile screen in Navbar.tsx
-- [ ] Verify "Start Shopping" button connects to all products page

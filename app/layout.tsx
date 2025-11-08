@@ -1,5 +1,6 @@
 import type { Metadata } from "next"; // Keep metadata import in this Server Component
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import CartProvider from "./components/Providers";
 import LayoutWrapper from "./components/LayoutWrapper";
@@ -7,6 +8,7 @@ import { CurrencyProvider } from "./context/CurrencyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { CompareProvider } from "./context/CompareContext";
 import { WishlistProvider } from "./context/WishlistContext";
+import { UserInteractionProvider } from "./context/UserInteractionContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,16 +35,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-TEST123456"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-TEST123456');
+          `}
+        </Script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <CurrencyProvider>
             <CompareProvider>
               <WishlistProvider>
-                <CartProvider>
-                  <LayoutWrapper>
-                    {children}
-                  </LayoutWrapper>
-                </CartProvider>
+                <UserInteractionProvider>
+                  <CartProvider>
+                    <LayoutWrapper>
+                      {children}
+                    </LayoutWrapper>
+                  </CartProvider>
+                </UserInteractionProvider>
               </WishlistProvider>
             </CompareProvider>
           </CurrencyProvider>
