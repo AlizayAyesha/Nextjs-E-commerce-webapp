@@ -2,7 +2,8 @@
 
 Welcome to the ultimate luxury e-commerce experience built with cutting-edge technology! This isn't just another online store—it's a fully functional, AI-powered luxury marketplace featuring enterprise-grade recommendation systems, stunning visuals, and premium user experiences.
 
-![Luxury E-Commerce Preview](https://github.com/user-attachments/assets/7c1d464f-7875-4637-aec6-5a54104a38bc)
+![Luxury E-Commerce Preview](<img width="1080" height="1920" alt="image" src="https://github.com/user-attachments/assets/97be2305-00f0-4bc0-84ba-c764f06fa3bc" />
+)
 
 ## 🚀 FEATURES OVERVIEW
 
