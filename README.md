@@ -1,219 +1,258 @@
-# 🌟 **LUXURY E-COMMERCE WEB APP** — Next.js | AI-Powered Premium Online Store
+# 🌟 LUXURY E-COMMERCE WEB APP — Next.js | AI-Powered Premium Online Store
 
-Welcome to the **ultimate luxury e-commerce experience** built with cutting-edge technology! This isn't just another online store—it's a **fully functional, AI-powered luxury marketplace** featuring enterprise-level recommendation systems, stunning visuals, and premium user experiences.
+Welcome to the ultimate luxury e-commerce experience built with cutting-edge technology! This isn't just another online store—it's a fully functional, AI-powered luxury marketplace featuring enterprise-grade recommendation systems, stunning visuals, and premium user experiences.
 
-## 🚀 **FEATURES OVERVIEW**
+![Luxury E-Commerce Preview](https://github.com/user-attachments/assets/7c1d464f-7875-4637-aec6-5a54104a38bc)
 
-### 🤖 **AI-Powered Recommendations** (Enterprise Level)
-- **Real Machine Learning**: Collaborative filtering with Pearson correlation
-- **TensorFlow.js Integration**: Browser-based AI for instant recommendations
-- **User Behavior Analysis**: Learns from every click, view, and purchase
-- **Hybrid Algorithms**: Combines collaborative + content-based filtering
-- **Real-time Adaptation**: Recommendations update instantly as users interact
+## 🚀 FEATURES OVERVIEW
+
+### 🤖 AI-Powered Intelligence
+- **AI Recommendation System**: Real machine learning with collaborative filtering and content-based recommendations
+- **TensorFlow.js Integration**: Browser-based AI for instant personalized suggestions
+- **Real-time Learning**: Adapts to user behavior with every interaction
+- **Hybrid Algorithms**: Combines collaborative + content-based filtering for superior accuracy
 - **Smart Fallbacks**: Works perfectly even with limited user data
 
-### 🎨 **Premium Visual Experience**
+### 🎨 Premium Visual Experience
 - **Auto-playing Videos**: Luxury cars, yachts, jets showcase in stunning video
-- **High-Resolution Images**: Curated product photography from Pinterest
+- **High-Resolution Images**: Curated product photography with Next.js optimization
 - **Responsive Design**: Perfect on desktop, tablet, and mobile
 - **Smooth Animations**: Hover effects and transitions for premium feel
 - **Luxury Typography**: Geist font family for elegant text rendering
 
-### 🛍️ **Advanced E-Commerce Features**
-- **Multi-Category Shopping**: Fashion, luxury cars, yachts, jets, watches, bags
+### 🛍️ Advanced E-Commerce Features
+- **Multi-Category Shopping**: Fashion, luxury cars, yachts, jets, watches, bags, memberships
 - **Smart Product Cards**: Interactive cards with wishlist and compare features
 - **Shopping Cart**: Persistent cart with currency conversion
 - **Product Filtering**: Advanced search and category navigation
 - **User Analytics**: Comprehensive tracking of user interactions
 
-### �‍💼 **Admin Management System**
-- **Category Management**: Full CRUD operations for product categories
-- **User Management**: Complete user administration with role-based access
-- **Bank Account Management**: Connect and manage payment processing accounts
-- **Admin Dashboard**: Real-time analytics and content management
-- **Content Management**: Sanity CMS integration for dynamic content
-- **User Roles**: Admin and regular user role management
+### 🧑‍💼 Admin Management System
+- **Category Management** — Full CRUD operations for product categories
+- **User Management** — Role-based access for admin and regular users
+- **Bank Account Management** — Integrate and manage payment gateways
+- **Admin Dashboard** — Real-time analytics, charts, and product performance insights
+- **AI Analytics Assistant** — Monitors trends, top categories, and purchase patterns
+- **Content Management** — Powered by Sanity CMS for dynamic content control
 
-### �💎 **Luxury Product Showcase**
-- **High-End Fashion**: Designer clothing, tuxedos, evening dresses
-- **Luxury Vehicles**: Aston Martin, Ferrari, Rolls-Royce, McLaren
-- **Private Aviation**: Jets, helicopters, charter planes
-- **Water Luxury**: Yachts, luxury cruises, elite water sports
-- **Accessories**: Designer bags, luxury perfumes, premium watches
+## 💎 Luxury Product Categories
 
-## 🧠 **AI RECOMMENDATION SYSTEM** (Technical Deep Dive)
+Explore a world of sophistication and innovation across our curated luxury segments:
 
-### **Real Machine Learning Algorithms**
+### 👗 Fashion
+Designer tuxedos, couture gowns, and luxury casual wear crafted for elegance and comfort.
+
+### 🚘 Luxury Cars
+A showcase of elite automobiles — Rolls-Royce, Ferrari, Aston Martin, and McLaren — combining power, performance, and prestige.
+
+### ✈️ Private Aviation
+Charter exclusive jets, helicopters, and aircraft for a seamless, first-class travel experience.
+
+### 🛥️ Marine Luxury
+Experience opulence at sea with private yachts, luxury cruises, and elite water sports adventures.
+
+### 👜 Accessories
+A refined selection of designer bags, limited-edition perfumes, and handcrafted luxury watches.
+
+### 💼 Elite Memberships
+Invitation-only luxury club memberships offering exclusive access to private events, high-end experiences, and personalized concierge services.
+
+## 🧠 AI RECOMMENDATION SYSTEM
+
+### Core Algorithms
 ```javascript
-// Pearson Correlation for User Similarity
-correlation = Σ((x-meanX)×(y-meanY)) / sqrt(Σ(x-meanX)² × Σ(y-meanY)²)
+// Pearson Correlation (User Similarity)
+correlation = Σ((x-meanX)*(y-meanY)) / sqrt(Σ(x-meanX)² * Σ(y-meanY)²)
 
-// Cosine Similarity for Item Similarity
-similarity = (A•B) / (||A|| × ||B||)
-
-// Collaborative Filtering Matrix
-User-Item Matrix → Personalized Recommendations
+// Cosine Similarity (Item Similarity)
+similarity = (A•B) / (||A|| * ||B||)
 ```
 
-### **AI Features**
-- ✅ **User-User Collaborative Filtering**: Finds similar users mathematically
-- ✅ **Item-Item Collaborative Filtering**: Recommends similar products
-- ✅ **Content-Based Filtering**: Uses product embeddings and categories
-- ✅ **Hybrid Recommendations**: Combines all algorithms intelligently
-- ✅ **Real-time Learning**: Adapts to user behavior instantly
-- ✅ **Cold Start Handling**: Works for new users with smart defaults
+### AI Features
+✅ User-User & Item-Item Collaborative Filtering
 
-### **Data Processing**
-- **Interaction Tracking**: Views, likes, cart additions, purchases
-- **Preference Learning**: Analyzes user categories and price ranges
-- **Similarity Scoring**: Mathematical correlation between users/products
-- **Recommendation Ranking**: Intelligent scoring and prioritization
+✅ TensorFlow.js Embeddings for content-based filtering
 
-## 🎯 **USER EXPERIENCE HIGHLIGHTS**
+✅ Real-time adaptation with React Context
 
-### **Smart Product Discovery**
-- **4 AI Recommendations**: Perfectly curated selection of products
-- **Video Previews**: Auto-playing videos for luxury items
-- **Interactive Cards**: Hover effects, smooth transitions
-- **Category Navigation**: Intuitive browsing experience
+✅ Hybrid model combining user behavior + item metadata
 
-### **Premium Interactions**
-- **Wishlist Management**: Save favorite items
-- **Compare Products**: Side-by-side product comparison
-- **Currency Conversion**: Multi-currency support
-- **Responsive Cart**: Persistent shopping cart
+✅ Cold-start handling with popularity-based defaults
 
-## 🛠️ **TECHNICAL ARCHITECTURE**
+### Data Processing
+Interaction Tracking: Views, likes, cart additions, purchases
 
-### **Frontend Stack**
-- **Next.js 14+**: App Router, Server Components, ISR
-- **React 18**: Hooks, Context API, Concurrent Features
-- **TypeScript**: Full type safety and developer experience
-- **Tailwind CSS**: Utility-first styling with custom design system
+Preference Learning: Analyzes user categories and price ranges
 
-### **AI & Machine Learning**
-- **TensorFlow.js**: Browser-based machine learning
-- **Custom Recommendation Engine**: Proprietary algorithms
-- **Real-time Processing**: Instant recommendation updates
-- **Memory Management**: Efficient tensor cleanup
+Similarity Scoring: Mathematical correlation between users/products
 
-### **Content Management**
-- **Sanity CMS**: Headless CMS for product management
-- **Dynamic Content**: Real-time content updates
-- **Media Optimization**: Automatic image/video processing
-- **Fallback System**: JSON data for offline/demo mode
+Recommendation Ranking: Intelligent scoring and prioritization
 
-### **Performance & Scalability**
-- **Vercel Deployment**: Global CDN, edge functions
-- **Image Optimization**: Next.js automatic optimization
-- **Lazy Loading**: Components load on demand
-- **Caching Strategy**: ISR for dynamic content
+## 📊 AI ANALYTICS ASSISTANT
+An intelligent analytics dashboard powered by AI:
 
-## 🚀 **GETTING STARTED**
+Trend Forecasting: Predicts top-selling products and seasonal demands
 
-### **Prerequisites**
-- Node.js 18+
-- npm or yarn
-- Git
+Customer Insights: Segments users by loyalty, purchase behavior, and engagement
 
-### **Installation**
+Smart Reports: Auto-generates sales summaries and performance recommendations
+
+## 🛠️ TECH STACK
+
+### Frontend
+Next.js 14+ — App Router, Server Components, ISR
+
+React 18 — Hooks, Context API, Concurrent Rendering
+
+TypeScript — Strong typing and reliability
+
+Tailwind CSS — Utility-first, responsive UI design
+
+### AI & Machine Learning
+TensorFlow.js — Browser-based machine learning
+
+Custom Recommender Engine — Hybrid collaborative filtering
+
+Real-time Processing — Instant recommendation updates
+
+### Backend & CMS
+Sanity CMS — Headless CMS for dynamic content management
+
+Next.js API Routes — Secure backend operations
+
+MongoDB / Firestore (optional) — Persistent user and order data
+
+### Performance
+Vercel Deployment — Global CDN with edge caching
+
+Next.js Optimization — Image, font, and lazy loading
+
+SEO Ready — Structured data, meta tags, and sitemap integration
+
+## ⚙️ INSTALLATION GUIDE
+
+### Prerequisites
+Node.js 18+
+
+npm or yarn
+
+Git
+
+### Setup
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/AlizayAyesha/Luxury-E-Commerce-Web-App.git
 cd Luxury-E-Commerce-Web-App
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start development
 npm run dev
 ```
 
-### **Environment Setup**
+### Environment Configuration
 ```bash
-# Create .env.local
+# .env.local
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_API_TOKEN=your_api_token
 ```
 
-### **Build for Production**
+### Build for Production
 ```bash
 npm run build
 npm start
 ```
 
-## 📊 **FEATURE BREAKDOWN**
+## 📈 FEATURE SUMMARY
 
-### **AI Recommendation System**
 | Feature | Technology | Status |
 |---------|------------|--------|
-| Collaborative Filtering | Pearson Correlation | ✅ Active |
-| Content-Based Filtering | TensorFlow Embeddings | ✅ Active |
-| Hybrid Recommendations | Multi-algorithm | ✅ Active |
-| Real-time Learning | React Context | ✅ Active |
-| Cold Start Handling | Popularity Fallback | ✅ Active |
-
-### **Product Categories**
-- **Fashion**: Tuxedos, dresses, casual wear
-- **Luxury Cars**: Aston Martin, Ferrari, Rolls-Royce
-- **Aviation**: Private jets, helicopters
-- **Marine**: Yachts, luxury cruises
-- **Accessories**: Bags, perfumes, watches
-
-### **Admin Management System**
-| Feature | Technology | Status |
-|---------|------------|--------|
+| AI Recommendations | TensorFlow.js | ✅ Active |
+| Collaborative Filtering | Pearson & Cosine Similarity | ✅ Active |
+| Real-Time Learning | React Context | ✅ Active |
+| Sanity CMS | Dynamic Content | ✅ Active |
+| Admin Dashboard | Next.js + React | ✅ Active |
+| Bank Account Management | Next.js API | ✅ Active |
 | Category Management | Sanity CMS | ✅ Active |
 | User Management | Sanity CMS | ✅ Active |
-| Bank Account Management | Next.js + React | ✅ Active |
-| Admin Dashboard | Next.js + React | ✅ Active |
 | Role-Based Access | TypeScript | ✅ Active |
 | Real-time Analytics | React Context | ✅ Active |
 
-### **Technical Features**
-- **Responsive Design**: Mobile-first approach
-- **Video Integration**: Auto-playing luxury showcases
-- **Image Optimization**: Next.js automatic processing
-- **SEO Optimized**: Meta tags, structured data
-- **Performance**: 95+ Lighthouse scores
+## 🎯 USER EXPERIENCE HIGHLIGHTS
 
-## 🎨 **DESIGN PHILOSOPHY**
+### Smart Product Discovery
+4 AI Recommendations: Perfectly curated selection of products
 
-### **Luxury Aesthetics**
-- **Minimalist Design**: Clean, uncluttered interfaces
-- **Premium Color Palette**: Sophisticated color schemes
-- **Typography Excellence**: Geist font for readability
-- **Smooth Animations**: Subtle transitions and effects
+Video Previews: Auto-playing videos for luxury items
 
-### **User Experience**
-- **Intuitive Navigation**: Easy product discovery
-- **Interactive Elements**: Engaging hover states
-- **Fast Loading**: Optimized performance
-- **Accessibility**: WCAG compliant design
+Interactive Cards: Hover effects, smooth transitions
 
-## 🔗 **LIVE DEMO**
+Category Navigation: Intuitive browsing experience
 
-Experience the luxury: **[https://luxury-e-commerce-web-app.vercel.app/](https://luxury-e-commerce-web-app.vercel.app/)**
+### Premium Interactions
+Wishlist Management: Save favorite items
 
-## 📈 **ROADMAP**
+Compare Products: Side-by-side product comparison
 
-### **Phase 1** ✅ (Completed)
-- [x] AI Recommendation System
-- [x] Luxury Product Showcase
-- [x] Responsive Design
-- [x] Video Integration
+Currency Conversion: Multi-currency support
 
-### **Phase 2** 🚧 (In Progress)
-- [x] Admin Dashboard ✅ **COMPLETED**
-- [x] Category Management ✅ **COMPLETED**
-- [x] User Management ✅ **COMPLETED**
-- [ ] User Authentication
-- [ ] Payment Integration
-- [ ] Order Management
-- [ ] Advanced Analytics
+Responsive Cart: Persistent shopping cart
 
-## 🤝 **CONTRIBUTING**
+## 🎨 DESIGN PHILOSOPHY
+
+### Luxury Aesthetics
+Minimalist Design: Clean, uncluttered interfaces
+
+Premium Color Palette: Sophisticated color schemes
+
+Typography Excellence: Geist font for readability
+
+Smooth Animations: Subtle transitions and effects
+
+### User Experience
+Intuitive Navigation: Easy product discovery
+
+Interactive Elements: Engaging hover states
+
+Fast Loading: Optimized performance
+
+Accessibility: WCAG compliant design
+
+## 🔗 LIVE DEMO
+
+Experience the luxury: 👉 https://luxury-e-commerce-web-app.vercel.app/
+
+## 🗺️ ROADMAP
+
+### ✅ Phase 1 — Completed
+AI Recommendation System
+
+Luxury Product Showcase
+
+Responsive Design
+
+Video Integration
+
+Admin Dashboard
+
+Category Management
+
+User Management
+
+Bank Account Management
+
+### 🚧 Phase 2 — In Progress
+User Authentication
+
+Payment Integration
+
+Order Management
+
+Advanced Analytics
+
+## 🤝 CONTRIBUTING
 
 We welcome contributions! Please see our contributing guidelines.
 
@@ -228,24 +267,24 @@ git push origin feature/amazing-feature
 # Open Pull Request
 ```
 
-## 📄 **LICENSE**
+## 📄 LICENSE
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 **ACKNOWLEDGMENTS**
+## 🙏 ACKNOWLEDGMENTS
 
-- **Next.js Team** for the amazing framework
-- **Vercel** for hosting and deployment
-- **Sanity** for the CMS platform
-- **Tailwind CSS** for the styling system
-- **TensorFlow.js** for machine learning capabilities
+Next.js Team for the amazing framework
 
----
+Vercel for hosting and deployment
 
-## 💬 **VISION**
+Sanity for the CMS platform
 
-*"Luxury isn't just about products—it's about creating extraordinary experiences. This platform reimagines online shopping through the lens of AI-powered personalization, stunning visuals, and premium craftsmanship."*
+Tailwind CSS for the styling system
 
-**Built with ❤️ for luxury and innovation. Experience the future of e-commerce today!** ✨
+TensorFlow.js for machine learning capabilities
 
-![Luxury E-Commerce Preview](https://github.com/user-attachments/assets/7c1d464f-7875-4637-aec6-5a54104a38bc)
+## 💬 VISION
+
+"Luxury isn't just about products—it's about creating extraordinary experiences. This platform reimagines online shopping through the lens of AI-powered personalization, stunning visuals, and premium craftsmanship."
+
+Built with ❤️ for luxury and innovation. Experience the future of e-commerce today! ✨
