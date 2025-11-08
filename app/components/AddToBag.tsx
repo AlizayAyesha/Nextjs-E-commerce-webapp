@@ -14,6 +14,8 @@ export interface ProductCart {
   sku: string; // Add SKU property to match the expected structure
 }
 
+
+
 export default function AddToBag({
   currency,
   description,
@@ -38,7 +40,7 @@ export default function AddToBag({
   const isProductInCart = () => {
     if (!cartDetails) return false; // Check if cartDetails is defined
     return Object.values(cartDetails).some(
-      (item: any) => item.name === product.name && item.price === product.price // Adjust logic as needed
+      (item: Record<string, unknown>) => item.name === product.name && item.price === product.price // Adjust logic as needed
     );
   };
 
@@ -46,9 +48,9 @@ export default function AddToBag({
   const getProductQuantity = () => {
     if (!cartDetails) return 0; // Check if cartDetails is defined
     const item = Object.values(cartDetails).find(
-      (item: any) => item.name === product.name && item.price === product.price
+      (item: Record<string, unknown>) => item.name === product.name && item.price === product.price
     );
-    return item ? (item as any).quantity : 0;
+    return item ? (item.quantity as number) : 0;
   };
 
   const handleAddToBag = () => {

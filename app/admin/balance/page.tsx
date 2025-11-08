@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, DollarSign, TrendingUp, CreditCard, AlertTriangle, Plus, Eye, Download } from 'lucide-react';
+import { ArrowLeft, DollarSign, TrendingUp, CreditCard, AlertTriangle, Eye, Download } from 'lucide-react';
 
 interface BalanceRecord {
   _id: string;

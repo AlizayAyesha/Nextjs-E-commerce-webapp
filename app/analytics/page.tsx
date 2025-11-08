@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import * as tf from "@tensorflow/tfjs";
+
 import { client } from "../../lib/sanity";
 
 interface UserInteraction {
@@ -81,7 +81,7 @@ export default function AnalyticsPage() {
       <h1 className="text-3xl font-bold mb-6">Predictive Insights Dashboard</h1>
       <p className="mb-4">Top predicted products based on user interactions:</p>
       <ul className="space-y-2">
-        {insights.map((insight: PredictiveInsight, index: number) => (
+        {insights.map((insight: PredictiveInsight) => (
           <li key={insight.productId} className="flex justify-between items-center p-4 bg-gray-100 rounded">
             <span>Product ID: {insight.productId}</span>
             <span>Predicted Score: {insight.predictedScore.toFixed(2)}</span>

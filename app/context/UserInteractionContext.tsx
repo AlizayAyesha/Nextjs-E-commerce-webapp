@@ -95,7 +95,7 @@ export const UserInteractionProvider: React.FC<UserInteractionProviderProps> = (
           setInteractions(reduced);
           try {
             localStorage.setItem('userInteractions', JSON.stringify(reduced));
-          } catch (secondError) {
+          } catch {
             console.error('Still unable to save interactions, clearing storage');
             // Last resort: clear all interactions
             setInteractions([]);

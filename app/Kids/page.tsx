@@ -26,7 +26,7 @@ export default async function KidsPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className='text-3xl font-bold text-center py-6'>Kids' Products</h1>
+        <h1 className='text-3xl font-bold text-center py-6'>Kids&apos; Products</h1>
         {kidsProducts.length > 0 ? (
           <div className='mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {kidsProducts.map((product: Product) => (

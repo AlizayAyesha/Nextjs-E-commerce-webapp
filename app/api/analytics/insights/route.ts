@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 // Initialize OpenAI client
@@ -41,9 +41,8 @@ const analyticsData = {
   categories: ['Men', 'Women', 'Kids', 'Luxury', 'Top picks', 'booking']
 };
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    const { type, data } = await request.json();
 
     console.log('🔄 AI Analytics Insights API called');
 
@@ -119,7 +118,7 @@ Make insights data-driven and specific to luxury fashion e-commerce.
     let insights;
     try {
       insights = JSON.parse(aiResponse);
-    } catch (parseError) {
+    } catch {
       // If JSON parsing fails, create fallback insights
       insights = [
         {

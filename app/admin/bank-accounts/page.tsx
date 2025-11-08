@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Building2, CreditCard, CheckCircle, XCircle, AlertTriangle, Plus, Eye, Settings, Shield } from 'lucide-react';
+import { ArrowLeft, Building2, CheckCircle, XCircle, AlertTriangle, Plus, Eye, Settings, Shield } from 'lucide-react';
 
 interface BankAccount {
   _id: string;

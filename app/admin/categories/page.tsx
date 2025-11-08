@@ -208,7 +208,7 @@ export default function ManageCategories() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200/60">
-                {categories.map((category, index) => (
+                {categories.map((category) => (
                   <tr key={category._id} className="hover:bg-gray-50/50 transition-colors duration-150">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">

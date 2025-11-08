@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Upload, X, Image as ImageIcon, Sparkles, Save, Eye, RefreshCw, AlertTriangle, Package } from 'lucide-react';
+import { Upload, X, Image as ImageIcon, Sparkles, Save, RefreshCw, AlertTriangle } from 'lucide-react';
 
 interface ProductData {
   title: string;
@@ -112,14 +112,7 @@ export default function AIProductAssistant({ onClose, onSave }: AIProductAssista
     }
   };
 
-  const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
-  };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

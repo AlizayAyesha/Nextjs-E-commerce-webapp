@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         price: product.price,
       },
     });
-  }, [product.id, addInteraction]);
+  }, [product.id, product.name, product.categoryName, product.price, addInteraction]);
 
   const handleCompare = () => {
     if (isInCompare(product.id)) {

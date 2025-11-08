@@ -26,7 +26,7 @@ export default async function MenPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <h1 className='text-3xl font-bold text-center py-6'>Men's Products</h1>
+        <h1 className='text-3xl font-bold text-center py-6'>Men&apos;s Products</h1>
         {menProducts.length > 0 ? (
           <div className='mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {menProducts.map((product: Product) => (

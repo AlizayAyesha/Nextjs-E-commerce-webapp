@@ -3,9 +3,20 @@
 import React, { useState } from 'react';
 import { Upload, X, Image as ImageIcon, Video, Save, Loader } from 'lucide-react';
 
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  categoryName: string;
+  slug: string;
+  imageUrl: string;
+  createdAt: string;
+}
+
 interface ProductUploadFormProps {
   onClose: () => void;
-  onSave: (product: any) => void;
+  onSave: (product: Product) => void;
 }
 
 export default function ProductUploadForm({ onClose, onSave }: ProductUploadFormProps) {

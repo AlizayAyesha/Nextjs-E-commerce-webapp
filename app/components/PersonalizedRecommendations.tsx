@@ -21,7 +21,6 @@ interface Product {
 const PersonalizedRecommendations: React.FC = () => {
   const [recommendations, setRecommendations] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
   const router = useRouter();
   const { interactions } = useUserInteractions();
@@ -37,13 +36,13 @@ const PersonalizedRecommendations: React.FC = () => {
         // Load TensorFlow lazily for better performance
         try {
           await import('@tensorflow/tfjs');
-        } catch (error) {
+        } catch {
           console.warn('TensorFlow lazy loading failed, using basic recommendations');
         }
 
         // Get all available products
         let allProducts: Array<{ id: string; name: string; category: string; price: number; imageUrl?: string; slug?: string }> = [];
-        let productImageMap: Map<string, string> = new Map();
+        const productImageMap: Map<string, string> = new Map();
 
         try {
           // Try Sanity first
@@ -61,16 +60,17 @@ const PersonalizedRecommendations: React.FC = () => {
           console.log('Sanity products fetched:', sanityProducts?.length || 0);
 
           if (sanityProducts && sanityProducts.length > 0) {
-            allProducts = sanityProducts.map((p: any) => {
-              const imageUrl = p.image ? urlFor(p.image) : '/placeholder-image.png';
-              productImageMap.set(p._id, imageUrl);
+            allProducts = sanityProducts.map((p: Record<string, unknown>) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const imageUrl = p.image ? urlFor(p.image as any) : '/placeholder-image.png';
+              productImageMap.set(p._id as string, imageUrl);
               return {
-                id: p._id,
-                name: p.name || 'Unknown Product',
-                category: p.category || 'General',
-                price: typeof p.price === 'number' ? p.price : parseFloat(p.price) || 0,
+                id: p._id as string,
+                name: (p.name as string) || 'Unknown Product',
+                category: (p.category as string) || 'General',
+                price: typeof p.price === 'number' ? p.price as number : parseFloat(p.price as string) || 0,
                 imageUrl,
-                slug: p.slug || p._id
+                slug: (p.slug as string) || (p._id as string)
               };
             });
           }
@@ -83,15 +83,15 @@ const PersonalizedRecommendations: React.FC = () => {
           try {
             const fallbackProducts = await import('./query-result.json');
             console.log('JSON fallback products:', fallbackProducts.default?.length || 0);
-            allProducts = fallbackProducts.default.map((p: any) => {
-              productImageMap.set(p._id, p.imageUrl || '/placeholder-image.png');
+            allProducts = fallbackProducts.default.map((p: Record<string, unknown>) => {
+              productImageMap.set(p._id as string, (p.imageUrl as string) || '/placeholder-image.png');
               return {
-                id: p._id,
-                name: p.name || 'Unknown Product',
-                category: p.categoryName || 'General',
-                price: typeof p.price === 'number' ? p.price : parseFloat(p.price.replace('$', '')) || 0,
-                imageUrl: p.imageUrl || '/placeholder-image.png',
-                slug: p.slug || p._id
+                id: p._id as string,
+                name: (p.name as string) || 'Unknown Product',
+                category: (p.categoryName as string) || 'General',
+                price: typeof p.price === 'number' ? p.price as number : parseFloat((p.price as string).replace('$', '')) || 0,
+                imageUrl: (p.imageUrl as string) || '/placeholder-image.png',
+                slug: (p.slug as string) || (p._id as string)
               };
             });
           } catch (jsonError) {
@@ -185,25 +185,25 @@ const PersonalizedRecommendations: React.FC = () => {
         console.log('Final recommendations:', recommendedProducts.length);
         setRecommendations(recommendedProducts);
 
-      } catch (error) {
-        console.error('Error in AI recommendations:', error);
+      } catch {
+        console.error('Error in AI recommendations');
         // Ultimate fallback to random products
         try {
           const fallbackProducts = await import('./query-result.json');
           const processedProducts = fallbackProducts.default
             .sort(() => Math.random() - 0.5)
             .slice(0, 4)
-            .map((p: any) => ({
-              _id: p._id,
-              name: p.name,
-              price: typeof p.price === 'number' ? p.price : parseFloat(p.price.replace('$', '')),
-              image: p.imageUrl,
-              category: p.categoryName,
-              slug: p.slug
+            .map((p: Record<string, unknown>) => ({
+              _id: p._id as string,
+              name: p.name as string,
+              price: typeof p.price === 'number' ? p.price as number : parseFloat((p.price as string).replace('$', '')),
+              image: p.imageUrl as string,
+              category: p.categoryName as string,
+              slug: p.slug as string
             }));
           setRecommendations(processedProducts);
-        } catch (fallbackError) {
-          console.error('All fallbacks failed:', fallbackError);
+        } catch {
+          console.error('All fallbacks failed');
           setRecommendations([]);
         }
       } finally {
@@ -251,7 +251,7 @@ const PersonalizedRecommendations: React.FC = () => {
         if (!product.image.startsWith('/') && !product.image.includes('://')) {
           return '/' + product.image;
         }
-      } catch (error) {
+      } catch {
         console.warn('Invalid image URL for product:', product._id, product.image);
       }
     }

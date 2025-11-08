@@ -1,18 +1,8 @@
 import { UserInteraction } from '../app/context/UserInteractionContext';
+import type { Tensor } from '@tensorflow/tfjs';
 
 // Lazy load TensorFlow to avoid slowing down initial page loads
-let tf: any = null;
-const loadTensorFlow = async () => {
-  if (!tf) {
-    try {
-      tf = await import('@tensorflow/tfjs');
-    } catch (error) {
-      console.warn('TensorFlow.js not available, using fallback recommendations');
-      return false;
-    }
-  }
-  return true;
-};
+const tf: typeof import('@tensorflow/tfjs') | null = null;
 
 export interface RecommendationResult {
   productId: string;
@@ -26,7 +16,7 @@ export interface RecommendationResult {
 export class RecommendationEngine {
   private userItemMatrix: Map<string, Map<string, number>> = new Map();
   private itemUserMatrix: Map<string, Map<string, number>> = new Map();
-  private productEmbeddings: Map<string, any> = new Map();
+  private productEmbeddings: Map<string, Tensor | null> = new Map();
 
   /**
    * Build user-item interaction matrix
@@ -300,7 +290,7 @@ export class RecommendationEngine {
   /**
    * Create product embeddings
    */
-  createProductEmbedding(productId: string, category: string, price: number): any {
+  createProductEmbedding(productId: string, category: string, price: number): Tensor | null {
     if (!tf) return null;
 
     const categoryHash = this.hashString(category);
@@ -360,7 +350,9 @@ export class RecommendationEngine {
    * Clean up resources
    */
   dispose() {
-    this.productEmbeddings.forEach(embedding => embedding.dispose());
+    this.productEmbeddings.forEach(embedding => {
+      if (embedding) embedding.dispose();
+    });
     this.productEmbeddings.clear();
   }
 

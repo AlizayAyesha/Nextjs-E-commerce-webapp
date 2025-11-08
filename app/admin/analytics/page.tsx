@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  BarChart3,
   TrendingUp,
   TrendingDown,
   Package,
@@ -16,8 +15,7 @@ import {
   Brain,
   Target,
   ShoppingCart,
-  Star,
-  RefreshCw
+  Star
 } from 'lucide-react';
 
 // Mock data for analytics
@@ -63,67 +61,36 @@ interface AIInsight {
 
 export default function AnalyticsPage() {
   const [selectedPeriod, setSelectedPeriod] = useState('7d');
-  const [selectedMetric, setSelectedMetric] = useState('orders');
   const [aiInsights, setAiInsights] = useState<AIInsight[]>([]);
-  const [loadingInsights, setLoadingInsights] = useState(true);
-  const [insightsError, setInsightsError] = useState<string | null>(null);
 
-  // Fetch AI insights on component mount
+  // Set fallback insights on component mount
   useEffect(() => {
-    const fetchAIInsights = async () => {
-      try {
-        setLoadingInsights(true);
-        const response = await fetch('/api/analytics/insights', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ type: 'generate-insights' }),
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-          setAiInsights(data.insights);
-        } else {
-          throw new Error('Failed to fetch AI insights');
-        }
-      } catch (error) {
-        console.error('Error fetching AI insights:', error);
-        setInsightsError('Failed to load AI insights');
-        // Set fallback insights
-        setAiInsights([
-          {
-            type: 'trend',
-            title: 'Luxury Items Showing Strong Growth',
-            description: 'Luxury category products have seen 28% growth this month. Consider increasing inventory for high-demand items.',
-            impact: 'high'
-          },
-          {
-            type: 'warning',
-            title: 'Women\'s Floral Print Shirt Declining',
-            description: 'Sales of Floral Print Shirt have dropped 5% this month. Consider seasonal promotion or replacement.',
-            impact: 'medium'
-          },
-          {
-            type: 'opportunity',
-            title: 'Kids Category Emerging Trend',
-            description: 'Kids products showing consistent 15-20% monthly growth. Expand kids collection for better market capture.',
-            impact: 'high'
-          },
-          {
-            type: 'prediction',
-            title: 'Weekend Sales Pattern Detected',
-            description: 'AI predicts 35% higher weekend sales. Optimize staffing and marketing for weekends.',
-            impact: 'medium'
-          }
-        ]);
-      } finally {
-        setLoadingInsights(false);
+    setAiInsights([
+      {
+        type: 'trend',
+        title: 'Luxury Items Showing Strong Growth',
+        description: 'Luxury category products have seen 28% growth this month. Consider increasing inventory for high-demand items.',
+        impact: 'high'
+      },
+      {
+        type: 'warning',
+        title: 'Women\'s Floral Print Shirt Declining',
+        description: 'Sales of Floral Print Shirt have dropped 5% this month. Consider seasonal promotion or replacement.',
+        impact: 'medium'
+      },
+      {
+        type: 'opportunity',
+        title: 'Kids Category Emerging Trend',
+        description: 'Kids products showing consistent 15-20% monthly growth. Expand kids collection for better market capture.',
+        impact: 'high'
+      },
+      {
+        type: 'prediction',
+        title: 'Weekend Sales Pattern Detected',
+        description: 'AI predicts 35% higher weekend sales. Optimize staffing and marketing for weekends.',
+        impact: 'medium'
       }
-    };
-
-    fetchAIInsights();
+    ]);
   }, []);
 
   const currentMonth = monthlyData.currentMonth;
@@ -241,7 +208,7 @@ export default function AnalyticsPage() {
             </div>
 
             <div className="space-y-4">
-              {dailyOrders.map((day, index) => (
+              {dailyOrders.map((day) => (
                 <div key={day.date} className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="w-16 text-sm text-gray-600">
@@ -269,7 +236,7 @@ export default function AnalyticsPage() {
           <div className="bg-white p-6 rounded-lg shadow-sm border">
             <h2 className="text-lg font-semibold text-gray-900 mb-6">Top Performing Products</h2>
             <div className="space-y-4">
-              {topProducts.map((product, index) => (
+              {topProducts.map((product) => (
                 <div key={product.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                   <div className="flex items-center space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 relative rounded-lg overflow-hidden bg-gray-200">

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, Edit, Trash2, Upload, Image, Video, Package, Users, BarChart3, Settings } from 'lucide-react';
 import { client } from '../../lib/sanity';
@@ -32,14 +31,12 @@ interface Category {
 }
 
 export default function AdminDashboard() {
-  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [users, setUsers] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showUploadForm, setShowUploadForm] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -68,20 +65,21 @@ export default function AdminDashboard() {
       ]);
 
       // Process products to handle category references
-      const processedProducts = productsData.map((product: any) => ({
-        ...product,
-        category: typeof product.category === 'string'
-          ? { _id: product.category, name: product.category }
-          : product.category
-      }));
+      const processedProducts = productsData.map((product: unknown) => {
+        const p = product as Record<string, unknown>;
+        return {
+          ...p,
+          category: typeof p.category === 'string'
+            ? { _id: p.category, name: p.category }
+            : p.category
+        };
+      });
 
       setProducts(processedProducts);
       setCategories(categoriesData);
       setUsers(usersData);
     } catch (error) {
       console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -108,10 +106,11 @@ export default function AdminDashboard() {
     alert(`Edit product functionality would open for product ID: ${productId}`);
   };
 
-  const handleAddProduct = async (newProduct: any) => {
+  const handleAddProduct = async (newProduct: unknown) => {
     try {
+      const p = newProduct as Record<string, unknown>;
       // Find the category by name
-      const category = categories.find(cat => cat.name === newProduct.categoryName);
+      const category = categories.find(cat => cat.name === p.categoryName);
       if (!category) {
         alert('Selected category not found. Please create the category first.');
         return;
@@ -121,13 +120,13 @@ export default function AdminDashboard() {
       // In a real implementation, you'd upload the image to Sanity first
       await client.create({
         _type: 'product',
-        name: newProduct.title || 'Unnamed Product',
-        price: typeof newProduct.price === 'string' ? parseFloat(newProduct.price) : newProduct.price,
+        name: p.title || 'Unnamed Product',
+        price: typeof p.price === 'string' ? parseFloat(p.price as string) : p.price,
         category: {
           _type: 'reference',
           _ref: category._id
         },
-        description: newProduct.description,
+        description: p.description,
         // Note: Image upload would need to be implemented separately
       });
 
@@ -318,6 +317,7 @@ export default function AdminDashboard() {
                           {product.image?.asset?.url?.includes('video') || product.image?.asset?.url?.endsWith('.mp4') ? (
                             <Video className="h-12 w-12 text-gray-400" />
                           ) : (
+                            // eslint-disable-next-line jsx-a11y/alt-text
                             <Image className="h-12 w-12 text-gray-400" />
                           )}
                         </div>
