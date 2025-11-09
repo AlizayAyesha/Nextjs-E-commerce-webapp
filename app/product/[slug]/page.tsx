@@ -119,7 +119,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   {data.categoryName}
                 </span>
               </div>
-              <h1 className="text-2xl font-bold mb-2">{data.name}</h1>
+              <h1 className="text-2xl font-bold mb-2 text-black">{data.name}</h1>
 
               <div className='mb-6 flex items-center gap-3 md:mb-10'>
                 <span className="flex items-center text-yellow-500 bg-yellow-200 rounded-full px-4 py-1 text-sm gap-x-2">
@@ -177,7 +177,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       />
                     </div>
                     <Link href="/checkout" passHref className="w-full sm:w-auto">
-                      <Button className="w-full sm:w-auto bg-green-500 text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
+                      <Button className="w-full sm:w-auto bg-black text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg hover:shadow-xl">
                         Check Out
                       </Button>
                     </Link>
@@ -185,7 +185,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 )}
               </div>
 
-              <p className='mt-12 text-base text-gray-500 tracking-wide'>{data.description}</p>
+              <p className='mt-12 text-base text-black tracking-wide'>{data.description}</p>
             </div>
           </div>
         </div>

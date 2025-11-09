@@ -68,7 +68,7 @@ export default function AddToBag({
   return (
     <Button
       onClick={handleAddToBag}
-      className="w-full bg-orange-500 text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-orange-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+      className="w-full bg-black text-white px-6 py-3 text-lg font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-200 shadow-lg hover:shadow-xl"
     >
       Add to Bag
     </Button>
