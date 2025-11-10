@@ -2,7 +2,6 @@ import productsData from '../../components/query-result.json';
 import { Button } from '../../components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navbar from '../../components/Navbar';
 
 interface BookingPageProps {
   params: {
@@ -31,7 +30,6 @@ export default async function BookingPage({ params }: BookingPageProps) {
 
   return (
     <div className='bg-white min-h-screen'>
-      <Navbar />
       <div className='mx-auto max-w-screen-xl px-4 md:px-8 py-8'>
         <div className='grid gap-8 md:grid-cols-2'>
           {/* Image/Video Container */}
